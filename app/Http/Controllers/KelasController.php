@@ -46,7 +46,7 @@ class KelasController extends Controller
     {
         //Method untuk Store sudah ditambahkan
         $rules = [
-            'kelas' => 'required',
+            'kelas' => 'required||unique:kelas',
 
 
         ];
@@ -54,6 +54,7 @@ class KelasController extends Controller
 
         $messages = [
             'kelas.required' => 'Kelas wajib diisi',
+            'kelas.unique' => 'Kelas sudah ada',
 
 
         ];
@@ -109,7 +110,7 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
 
         $rules = [
-            'kelas' => 'required',
+            'kelas' => 'required', Rule::unique('kelas')->ignore($id)
 
 
         ];
@@ -117,6 +118,7 @@ class KelasController extends Controller
 
         $messages = [
             'kelas.required' => 'Kelas wajib diisi',
+            'kelas.unique' => 'Kelas sudah ada',
 
 
         ];
