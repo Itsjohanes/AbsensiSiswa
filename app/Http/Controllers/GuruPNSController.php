@@ -73,7 +73,7 @@ class GuruPNSController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
@@ -88,10 +88,9 @@ class GuruPNSController extends Controller
 
         GuruPNS::create(array_merge($input, ['id_user' => $user->id]));
 
-        Alert::success('Berhasil', 'Guru PNS Berhasil Ditambahkan');
+        Alert::success('Berhasil', 'Siswa Berhasil Ditambahkan');
 
         return redirect('/guru-pns');
-
     }
 
     /**
@@ -133,8 +132,8 @@ class GuruPNSController extends Controller
             'name'                  => 'required',
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
-            'email'                 => 'required|email|',Rule::unique('users')->ignore($id),
-            'nip'                   => 'required|numeric|',Rule::unique('guru_p_n_s')->ignore($id),
+            'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
+            'nip'                   => 'required|numeric|', Rule::unique('guru_p_n_s')->ignore($id),
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -160,11 +159,11 @@ class GuruPNSController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        
+
         $guru_pns->nip = $request->nip;
         $guru_pns->no_hp = $request->no_hp;
         $guru_pns->alamat = $request->alamat;
@@ -193,13 +192,12 @@ class GuruPNSController extends Controller
         if ($guru_pns->guru_pns_absen()->count()) {
             Alert::error('Gagal', 'Guru PNS ini sudah memiliki riwayat absen');
             return redirect()->back();
-        }
-        else {
+        } else {
             $user = User::where('id', $guru_pns->id_user)->delete();
             $guru_pns->delete();
-    
+
             Alert::success('Berhasil', 'Guru PNS berhasil dihapus');
-    
+
             return redirect('/guru-pns');
         }
     }

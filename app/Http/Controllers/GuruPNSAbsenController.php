@@ -26,7 +26,7 @@ class GuruPNSAbsenController extends Controller
         // $tanggal = date("d-m-Y");
 
         // $date = Carbon::now();
-        
+
         // $carbon = $date->locale('id')->format('d-m-Y');
 
         // $cek = $tanggal == $carbon ? 'sama' :'tidak sama';
@@ -59,8 +59,8 @@ class GuruPNSAbsenController extends Controller
         $guru_pns = GuruPNS::where('id_user', auth()->user()->id)->first();
 
         // data tanggal hari ini
-        $timezone = 'Asia/Makassar'; 
-        $date = new DateTime('now', new DateTimeZone($timezone)); 
+        $timezone = 'Asia/Makassar';
+        $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
 
@@ -71,22 +71,20 @@ class GuruPNSAbsenController extends Controller
 
         $pns_absen = GuruPNSAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
 
-        if($pns_absen) {
+        if ($pns_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
             return redirect()->back();
-        }
-        else {
-            if($jarak > 0.001) {
+        } else {
+            if ($jarak > 0.001) {
                 Alert::error('Gagal', 'Jarak anda jauh dari sekolah!');
                 return redirect()->back();
-            }
-            else {
+            } else {
                 GuruPNSAbsen::create([
                     'id_guru_pns' => $guru_pns->id,
                     'tgl'         => $tanggal,
                     'jam_masuk'    => $localtime
                 ]);
-    
+
                 Alert::success('Berhasil', 'Berhasil melakukan absen masuk');
                 return redirect('/absen-guru-pns');
             }
@@ -142,8 +140,8 @@ class GuruPNSAbsenController extends Controller
     {
         $guru_pns = GuruPNS::where('id_user', auth()->user()->id)->first();
 
-        $timezone = 'Asia/Makassar'; 
-        $date = new DateTime('now', new DateTimeZone($timezone)); 
+        $timezone = 'Asia/Jakarta';
+        $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
 
@@ -154,55 +152,50 @@ class GuruPNSAbsenController extends Controller
 
         $pns_absen = GuruPNSAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
 
-        if($pns_absen) {
-            if($pns_absen->jam_keluar == "") {
+        if ($pns_absen) {
+            if ($pns_absen->jam_keluar == "") {
                 if ($jarak < 0.015) {
                     $pns_absen->update([
                         'jam_keluar' => $localtime,
                         'jam_kerja' => date('H:i:s', strtotime($localtime) - strtotime($pns_absen->jam_masuk))
                     ]);
-    
+
                     Alert::success('Berhasil', 'Sampai ketemu lagi besok :)');
                     return redirect('/absen-guru-pns');
-                }
-                else {
+                } else {
                     Alert::error('Gagal', 'Jarak anda jauh dari sekolah!');
                     return redirect()->back();
                 }
-            }
-            else {
+            } else {
                 Alert::warning('Peringatan', 'Sudah melakukan absensi keluar');
                 return redirect()->back();
             }
-        } 
-        else {
+        } else {
             Alert::error('Gagal', 'Anda belum melakukan absensi masuk!');
             return redirect()->back();
         }
-        
     }
 
     // menghitung jarak latitude dan longitude dari sekolah ke device absen
-    public function distance($lat1, $lon1, $lat2, $lon2, $unit) 
+    public function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
         if (($lat1 == $lat2) && ($lon1 == $lon2)) {
-          return 0;
-        }
-        else {
-          $theta = $lon1 - $lon2;
-          $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-          $dist = acos($dist);
-          $dist = rad2deg($dist);
-          $miles = $dist * 60 * 1.1515;
-          $unit = strtoupper($unit);
-      
-          if ($unit == "K") {
-            return ($miles * 1.609344);
-          } else if ($unit == "N") {
-            return ($miles * 0.8684);
-          } else {
-            return $miles;
-          }
+            return 0;
+        } else {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+            $unit = strtoupper($unit);
+
+            if ($unit == "K") {
+                return ($miles * 1.609344);
+            } else if ($unit == "N") {
+                return ($miles * 0.8684);
+            } else {
+                return $miles;
+            }
         }
     }
 }
