@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Absensi Guru PNS')
+@section('title', 'Laporan Absensi Siswa')
 
 @push('addon-style')
 <link rel="stylesheet" href="{{ asset('assets/css/datepicker.css') }}">
@@ -11,7 +11,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Absensi Guru PNS</h4>
+                <h4 class="page-title">Absensi Siswa</h4>
                 <div class="btn-group btn-group-page-header ml-auto">
                 </div>
             </div>

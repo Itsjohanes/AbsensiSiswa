@@ -40,7 +40,7 @@
 
                             </div>
                             <div class="card-detail">
-                                <form action="{{ route('absen-guru-pns.store') }}" method="POST">
+                                <form action="{{ route('absen-siswa.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="lat" name="lat">
                                     <input type="hidden" id="lng" name="lng">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="card-detail">
 
-                                <form action="{{ route('absen-pns-keluar') }}" method="POST">
+                                <form action="{{ route('absen-siswa-keluar') }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="lat1" name="lat">
                                     <input type="hidden" id="lng1" name="lng">

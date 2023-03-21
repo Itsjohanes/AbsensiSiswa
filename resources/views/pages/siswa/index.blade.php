@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('guru-pns.create') }}" class="btn btn-primary">Tambah Siswa</a>
+                            <a href="{{ route('siswa.create') }}" class="btn btn-primary">Tambah Siswa</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -31,12 +31,12 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->user->name }}</td>
-                                            <td class="text-center">{{ $data->nip }}</td>
+                                            <td class="text-center">{{ $data->nisn }}</td>
                                             <td>{{ $data->alamat }}</td>
                                             <td>{{ $data->no_hp }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('guru-pns.edit', $data->id) }}" class="btn btn-warning d-inline"><i class="fas fa-edit"></i></a>
-                                                <form action="{{ route('guru-pns.destroy', $data->id) }}" method="POST" class="d-inline" onclick="return confirm('Apa yakin ingin menghapus data ini? Data yang terkait juga akan ikut terhapus')" .>
+                                                <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-warning d-inline"><i class="fas fa-edit"></i></a>
+                                                <form action="{{ route('siswa.destroy', $data->id) }}" method="POST" class="d-inline" onclick="return confirm('Apa yakin ingin menghapus data ini? Data yang terkait juga akan ikut terhapus')" .>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" data-id="{{ $data->id }}" class="btn btn-danger d-inline"><i class="fas fa-trash-alt"></i></button>

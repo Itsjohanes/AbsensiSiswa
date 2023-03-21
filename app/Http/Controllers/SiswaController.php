@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\KepalaSekolah;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -11,7 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 use Illuminate\Validation\Rule;
 
-class KepalaSekolahController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class KepalaSekolahController extends Controller
      */
     public function index()
     {
-        $kepsek = KepalaSekolah::with('user')->get();
+        $guru_pns = Siswa::with('user')->get();
 
-        return view('pages.kepsek.index', compact('kepsek'));
+        return view('pages.siswa.index', compact('guru_pns'));
     }
 
     /**
@@ -32,7 +32,7 @@ class KepalaSekolahController extends Controller
      */
     public function create()
     {
-        return view('pages.kepsek.create');
+        return view('pages.siswa.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class KepalaSekolahController extends Controller
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
             'email'                 => 'required|email|unique:users',
-            'nip'                   => 'required|numeric|unique:kepala_sekolahs',
+            'nisn'                   => 'required|numeric|unique:guru_p_n_s',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -64,8 +64,8 @@ class KepalaSekolahController extends Controller
             'email.required'                => 'Email wajib diisi',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
-            'nip.required'                  => 'NIP wajib diisi',
-            'nip.unique'                    => 'NIP sudah terdaftar',
+            'nisn.required'                  => 'NIP wajib diisi',
+            'nisn.unique'                    => 'NIP sudah terdaftar',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -73,25 +73,24 @@ class KepalaSekolahController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'level' => 'kepsek',
+            'level' => 'guru_pns',
             'password' => $request->password,
         ]);
 
         $input = $request->except(['name', 'email', 'password', 'konfirmasi_password']);
 
-        KepalaSekolah::create(array_merge($input, ['id_user' => $user->id]));
+        Siswa::create(array_merge($input, ['id_user' => $user->id]));
 
-        Alert::success('Berhasil', 'Kepala Berhasil Ditambahkan');
+        Alert::success('Berhasil', 'Siswa Berhasil Ditambahkan');
 
-        return redirect('/kepala-sekolah');
-
+        return redirect('/siswa');
     }
 
     /**
@@ -113,9 +112,9 @@ class KepalaSekolahController extends Controller
      */
     public function edit($id)
     {
-        $kepsek = KepalaSekolah::find($id);
+        $guru_pns = Siswa::find($id);
 
-        return view('pages.kepsek.edit', compact('kepsek'));
+        return view('pages.siswa.edit', compact('guru_pns'));
     }
 
     /**
@@ -127,14 +126,14 @@ class KepalaSekolahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kepsek = KepalaSekolah::find($id);
+        $guru_pns = Siswa::find($id);
 
         $rules = [
             'name'                  => 'required',
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
-            'email'                 => 'required|email|',Rule::unique('users')->ignore($id),
-            'nip'                   => 'required|numeric|',Rule::unique('kepala_sekolahs')->ignore($id),
+            'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
+            'nisn'                   => 'required|numeric|', Rule::unique('guru_p_n_s')->ignore($id),
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -150,9 +149,9 @@ class KepalaSekolahController extends Controller
             'email.required'                => 'Email wajib diisi',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
-            'nip.required'                  => 'NIP wajib diisi',
-            'nip.numeric'                   => 'NIP harus berupa angka',
-            'nip.unique'                    => 'NIP sudah terdaftar',
+            'nisn.required'                  => 'NIP wajib diisi',
+            'nisn.numeric'                   => 'NIP harus berupa angka',
+            'nisn.unique'                    => 'NIP sudah terdaftar',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -160,25 +159,25 @@ class KepalaSekolahController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        
-        $kepsek->nip = $request->nip;
-        $kepsek->no_hp = $request->no_hp;
-        $kepsek->alamat = $request->alamat;
-        $kepsek->save();
 
-        $user = User::find($kepsek->id_user);
+        $guru_pns->nisn = $request->nisn;
+        $guru_pns->no_hp = $request->no_hp;
+        $guru_pns->alamat = $request->alamat;
+        $guru_pns->save();
+
+        $user = User::find($guru_pns->id_user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
 
-        Alert::success('Berhasil', 'Kepala Sekolah berhasil diubah');
+        Alert::success('Berhasil', 'Siswa berhasil diubah');
 
-        return redirect('/kepala-sekolah');
+        return redirect('/siswa');
     }
 
     /**
@@ -189,13 +188,17 @@ class KepalaSekolahController extends Controller
      */
     public function destroy($id)
     {
-        $kepsek = KepalaSekolah::find($id);
-        $user = User::where('id', $kepsek->id_user)->delete();
-        $kepsek->delete();
+        $guru_pns = Siswa::find($id);
+        if ($guru_pns->siswa_absen()->count()) {
+            Alert::error('Gagal', 'Siswa ini sudah memiliki riwayat absen');
+            return redirect()->back();
+        } else {
+            $user = User::where('id', $guru_pns->id_user)->delete();
+            $guru_pns->delete();
 
-        Alert::success('Berhasil', 'Kepala Sekolah berhasil dihapus');
+            Alert::success('Berhasil', 'Siswa berhasil dihapus');
 
-        return redirect('/kepala-sekolah');
-
+            return redirect('/siswa');
+        }
     }
 }

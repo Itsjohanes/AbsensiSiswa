@@ -11,7 +11,7 @@
 						<p>Dashboard</p>
 					</a>
 				</li>
-				@if((auth()->user()->level == 'admin') || (auth()->user()->level == 'kepsek'))
+				@if((auth()->user()->level == 'admin') )
 				<li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
 					<a href="/admin">
 						<i class="fas fa-user-shield text-secondary"></i>
@@ -20,16 +20,16 @@
 					</a>
 				</li>
 
-				<li class="nav-item {{ Request::is('guru-pns') ? 'active' : '' }}">
-					<a href="/guru-pns">
+				<li class="nav-item {{ Request::is('siswa') ? 'active' : '' }}">
+					<a href="/siswa">
 						<i class="fas fa-chalkboard-teacher text-danger"></i>
 						<p>Siswa</p>
-						<span class="badge badge-count badge-danger">{{ \App\Models\GuruPNS::count() }}</span>
+						<span class="badge badge-count badge-danger">{{ \App\Models\Siswa::count() }}</span>
 					</a>
 				</li>
 
 
-				{{-- <li class="nav-item {{ (Request::is('laporan-absensi-pns')) || (Request::is('laporan-absensi-ptt')) ? 'show' : ''}} submenu">
+				{{-- <li class="nav-item {{ (Request::is('laporan-absensi'))  ? 'show' : ''}} submenu">
 				<a data-toggle="collapse" href="#base">
 					<i class="fas fa-layer-group"></i>
 					<p>Laporan Absensi</p>
@@ -37,7 +37,7 @@
 				</a>
 				<div class="collapse show" id="base">
 					<ul class="nav nav-collapse">
-						<li class="{{ Request::is('laporan-absensi-pns') ? 'active' : '' }}">
+						<li class="{{ Request::is('laporan-absensi') ? 'active' : '' }}">
 							<a href="../components/avatars.html">
 								<span class="sub-item">Siswa/span>
 							</a>
@@ -50,16 +50,16 @@
 				</li> --}}
 
 
-				<li class="nav-item {{ (Request::is('laporan-absensi-pns'))  ? 'active submenu' : ''}}">
+				<li class="nav-item {{ (Request::is('laporan-absensi'))  ? 'active submenu' : ''}}">
 					<a data-toggle="collapse" href="#tables">
 						<i class="fas fa-table text-primary"></i>
 						<p>Laporan Absensi</p>
 						<span class="caret"></span>
 					</a>
-					<div class="collapse {{ (Request::is('laporan-absensi-pns')) ? 'show' : ''}}" id="tables">
+					<div class="collapse {{ (Request::is('laporan-absensi')) ? 'show' : ''}}" id="tables">
 						<ul class="nav nav-collapse">
-							<li class="{{ Request::is('laporan-absensi-pns') ? 'active' : '' }}">
-								<a href="/laporan-absensi-pns">
+							<li class="{{ Request::is('laporan-absensi') ? 'active' : '' }}">
+								<a href="/laporan-absensi">
 									<span class="sub-item">Siswa</span>
 								</a>
 							</li>
@@ -76,8 +76,8 @@
 
 				@endif
 				@if (auth()->user()->level == 'guru_pns')
-				<li class="nav-item {{ Request::is('absen-guru-pns') ? 'active' : '' }}">
-					<a href="/absen-guru-pns">
+				<li class="nav-item {{ Request::is('absen-siswa') ? 'active' : '' }}">
+					<a href="/absen-siswa">
 						<i class="fas fa-clipboard-list text-warning"></i>
 						<p>Absensi Siswa</p>
 					</a>

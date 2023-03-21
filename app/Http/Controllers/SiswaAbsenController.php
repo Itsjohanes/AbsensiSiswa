@@ -6,15 +6,15 @@ use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
 use App\Models\Koordinat;
-use App\Models\GuruPNS;
-use App\Models\GuruPNSAbsen;
+use App\Models\Siswa;
+use App\Models\SiswaAbsen;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Carbon\Carbon;
 
 
-class GuruPNSAbsenController extends Controller
+class SiswaAbsenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,9 +32,9 @@ class GuruPNSAbsenController extends Controller
         // $cek = $tanggal == $carbon ? 'sama' :'tidak sama';
 
         // return $cek;
-        $guru_pns = GuruPNS::where('id_user', auth()->user()->id)->first();
-        $data_absen = GuruPNSAbsen::where('id_guru_pns', '=', $guru_pns->id)->get();
-        return view('pages.absen-pns.index', compact('data_absen'));
+        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
+        $data_absen = SiswaAbsen::where('id_guru_pns', '=', $guru_pns->id)->get();
+        return view('pages.absen-siswa.index', compact('data_absen'));
     }
 
     /**
@@ -56,10 +56,10 @@ class GuruPNSAbsenController extends Controller
     public function store(Request $request)
     {
         // mendapatkan data login dari pns
-        $guru_pns = GuruPNS::where('id_user', auth()->user()->id)->first();
+        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
 
         // data tanggal hari ini
-        $timezone = 'Asia/Makassar';
+        $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
@@ -69,24 +69,25 @@ class GuruPNSAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = GuruPNSAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
+        $pns_absen = SiswaAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
 
         if ($pns_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
             return redirect()->back();
         } else {
-            if ($jarak > 0.001) {
+            if ($jarak > 0.2) {
                 Alert::error('Gagal', 'Jarak anda jauh dari sekolah!');
                 return redirect()->back();
             } else {
-                GuruPNSAbsen::create([
+
+                SiswaAbsen::create([
                     'id_guru_pns' => $guru_pns->id,
                     'tgl'         => $tanggal,
                     'jam_masuk'    => $localtime
                 ]);
 
                 Alert::success('Berhasil', 'Berhasil melakukan absen masuk');
-                return redirect('/absen-guru-pns');
+                return redirect('/absen-siswa');
             }
         }
     }
@@ -138,7 +139,7 @@ class GuruPNSAbsenController extends Controller
 
     public function absenKeluar(Request $request)
     {
-        $guru_pns = GuruPNS::where('id_user', auth()->user()->id)->first();
+        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
 
         $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
@@ -150,7 +151,7 @@ class GuruPNSAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = GuruPNSAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
+        $pns_absen = SiswaAbsen::where('id_guru_pns', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
 
         if ($pns_absen) {
             if ($pns_absen->jam_keluar == "") {
@@ -161,7 +162,7 @@ class GuruPNSAbsenController extends Controller
                     ]);
 
                     Alert::success('Berhasil', 'Sampai ketemu lagi besok :)');
-                    return redirect('/absen-guru-pns');
+                    return redirect('/absen-siswa');
                 } else {
                     Alert::error('Gagal', 'Jarak anda jauh dari sekolah!');
                     return redirect()->back();

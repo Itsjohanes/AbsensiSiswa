@@ -47,19 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class, 'id_user');
     }
-
-    public function kepsek()
+    public function siswa()
     {
-        return $this->hasOne(KepalaSekolah::class, 'id_user');
-    }
-
-    public function guru_pns()
-    {
-        return $this->hasOne(GuruPNS::class, 'id_user');
-    }
-
-    public function guru_ptt()
-    {
-        return $this->hasOne(GuruPTT::class, 'id_user');
+        return $this->hasOne(Siswa::class, 'id_user');
     }
 }

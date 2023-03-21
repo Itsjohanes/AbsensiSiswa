@@ -46,7 +46,7 @@
                         <td>Nama Siswa</td>
                         <td>Jam Masuk</td>
                         <td>Jam Keluar</td>
-                        <td>Jumlah Jam Kerja</td>
+                        <td>Jumlah Jam Belajar</td>
                         <td>Keterangan Masuk</td>
                     </tr>
                 </thead>

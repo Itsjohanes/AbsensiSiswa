@@ -7,8 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KepalaSekolahController;
-use App\Http\Controllers\GuruPNSController;
-use App\Http\Controllers\GuruPNSAbsenController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SiswaAbsenController;
 use App\Http\Controllers\GuruPTTController;
 use App\Http\Controllers\GuruPTTAbsenController;
 use App\Http\Controllers\LaporanAbsenController;
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,kepsek,guru_pns,guru_ptt'
 
     Route::resource('admin', AdminController::class);
 
-    Route::resource('guru-pns', GuruPNSController::class);
+    Route::resource('siswa', SiswaController::class);
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
@@ -44,9 +44,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('kepala-sekolah', KepalaSekolahController::class);
 
-    Route::resource('guru-pns', GuruPNSController::class);
+    Route::resource('siswa', SiswaController::class);
 
-    Route::get('/laporan-absensi-pns', [LaporanAbsenController::class, 'laporanPNS']);
+    Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporanPNS']);
     Route::get('/filter-pns/{tglawal}/{tglakhir}', [LaporanAbsenController::class, 'filterPNS']);
     Route::get('/cetak-pns/{data1}/{data2}', [LaporanAbsenController::class, 'cetakPNS']);
 
@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
 Route::group(['middleware' => ['auth', 'ceklevel:guru_pns']], function () {
 
-    Route::resource('absen-guru-pns', GuruPNSAbsenController::class);
-    Route::post('absen-guru-pns-keluar', [GuruPNSAbsenController::class, 'absenKeluar'])->name('absen-pns-keluar');
+    Route::resource('absen-siswa', SiswaAbsenController::class);
+    Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
 });
 
 
