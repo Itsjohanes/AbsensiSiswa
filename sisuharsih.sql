@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 21, 2023 at 01:36 PM
+-- Generation Time: Mar 21, 2023 at 02:56 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -59,6 +59,19 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `id` int NOT NULL,
+  `kelas` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -217,6 +230,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `koordinats`
 --
 ALTER TABLE `koordinats`
@@ -279,6 +298,12 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `kelas`
+--
+ALTER TABLE `kelas`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `koordinats`
