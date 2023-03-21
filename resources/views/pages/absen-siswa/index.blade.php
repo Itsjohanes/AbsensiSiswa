@@ -22,8 +22,8 @@
                             <div class="card-detail">
                                 <p>Catatan:</p>
                                 <ul>
-                                    <li>Untuk bisa melakukan absensi, guru harus berada dalam radius kurang dari 200m dari jarak sekolah</li>
-                                    <li>Jika jarak guru melebihi 200m, absensi tidak bisa dilakukan dan muncul pesan peringatan agar melakukan absensi dalam lingkungan sekolah</li>
+                                    <li>Untuk bisa melakukan absensi, siswa harus berada dalam radius kurang dari 200m dari jarak sekolah</li>
+                                    <li>Jika jarak siswa melebihi 200m, absensi tidak bisa dilakukan dan muncul pesan peringatan agar melakukan absensi dalam lingkungan sekolah</li>
                                     <li>Absen masuk dan absen keluar hanya bisa dilakukan sekali dalam sehari</li>
                                 </ul>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="card-title text-center text-white">Fitur Pengujian</div>
                         </div>
                         <div class="card-body">
-                            <h3 class="text-danger">Fitur ini digunakan untuk menyesuaikan koordinat guru dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata</h3>
+                            <h3 class="text-danger">Fitur ini digunakan untuk menyesuaikan koordinat siswa dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata</h3>
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-group">

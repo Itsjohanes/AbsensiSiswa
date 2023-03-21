@@ -69,9 +69,9 @@ class SiswaAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
+        $siswa_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
-        if ($pns_absen) {
+        if ($siswa_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
             return redirect()->back();
         } else {
@@ -151,14 +151,14 @@ class SiswaAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
+        $siswa_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
-        if ($pns_absen) {
-            if ($pns_absen->jam_keluar == "") {
+        if ($siswa_absen) {
+            if ($siswa_absen->jam_keluar == "") {
                 if ($jarak < 0.2) {
-                    $pns_absen->update([
+                    $siswa_absen->update([
                         'jam_keluar' => $localtime,
-                        'jam_kerja' => date('H:i:s', strtotime($localtime) - strtotime($pns_absen->jam_masuk))
+                        'jam_kerja' => date('H:i:s', strtotime($localtime) - strtotime($siswa_absen->jam_masuk))
                     ]);
 
                     Alert::success('Berhasil', 'Sampai ketemu lagi besok :)');

@@ -16,9 +16,9 @@ class LaporanAbsenController extends Controller
     {
         $data1 = $tglawal;
         $data2 = $tglakhir;
-        $absen_pns = SiswaAbsen::whereBetween('tgl', [$tglawal, $tglakhir])->orderBy('tgl', 'ASC')->get();
+        $absen_siswa = SiswaAbsen::whereBetween('tgl', [$tglawal, $tglakhir])->orderBy('tgl', 'ASC')->get();
 
-        return view('pages.laporan.filter', compact('absen_pns', 'data1', 'data2'));
+        return view('pages.laporan.filter', compact('absen_siswa', 'data1', 'data2'));
     }
 
 
@@ -28,8 +28,8 @@ class LaporanAbsenController extends Controller
         $tglawal = $data1;
         $tglakhir = $data2;
 
-        $absen_pns = SiswaAbsen::whereBetween('tgl', [$data1, $data2])->orderBy('tgl', 'ASC')->get();
+        $absen_siswa = SiswaAbsen::whereBetween('tgl', [$data1, $data2])->orderBy('tgl', 'ASC')->get();
 
-        return view('pages.laporan.cetak', compact('absen_pns', 'tglawal', 'tglakhir'));
+        return view('pages.laporan.cetak', compact('absen_siswa', 'tglawal', 'tglakhir'));
     }
 }

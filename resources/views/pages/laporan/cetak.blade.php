@@ -51,7 +51,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($absen_pns as $data)
+                    @forelse($absen_siswa as $data)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ \Carbon\Carbon::parse($data->tgl)->locale('id')->isoFormat('LL') }}</td>
