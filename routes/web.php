@@ -6,13 +6,12 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaAbsenController;
 
 use App\Http\Controllers\LaporanAbsenController;
 use App\Http\Controllers\KoordinatSekolahController;
-
+use App\Http\Controllers\KelasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +39,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,siswa']], function () {
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('admin', AdminController::class);
+    Route::resource('kelas', KelasController::class);
 
 
     Route::resource('siswa', SiswaController::class);
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
     Route::get('/filter/{tglawal}/{tglakhir}', [LaporanAbsenController::class, 'filter']);
     Route::get('/cetak/{data1}/{data2}', [LaporanAbsenController::class, 'cetak']);
-
+    //tambahkan kelas
 
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);
     Route::post('ubah-koordinat', [KoordinatSekolahController::class, 'update']);

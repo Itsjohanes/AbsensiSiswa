@@ -1,42 +1,37 @@
 @extends('layout.app')
 
-@section('title', 'Siswa')
+@section('title', 'Kelas')
 
 @section('content')
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Siswa</h4>
+                <h4 class="page-title">Kelas</h4>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('siswa.create') }}" class="btn btn-primary">Tambah Siswa</a>
+                            <a href="{{ route('kelas.create') }}" class="btn btn-primary">Tambah Kelas</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="basic-datatables" class="display table table-striped table-hover" cellspacing="0" width="100%">
                                     <thead>
                                         <th class="text-center">No</th>
-                                        <th>Nama</th>
-                                        <th class="text-center">NISN</th>
-                                        <th>Alamat</th>
-                                        <th>Nomor Handphone</th>
+                                        <th>Kelas</th>
                                         <th class="text-center">Action</th>
+
                                     </thead>
                                     <tbody>
-                                        @forelse($siswa as $data)
+                                        @forelse($kelas as $data)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $data->user->name }}</td>
-                                            <td class="text-center">{{ $data->nisn }}</td>
-                                            <td>{{ $data->alamat }}</td>
-                                            <td>{{ $data->no_hp }}</td>
+                                            <td>{{ $data->kelas }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-warning d-inline"><i class="fas fa-edit"></i></a>
-                                                <form action="{{ route('siswa.destroy', $data->id) }}" method="POST" class="d-inline" onclick="return confirm('Apa yakin ingin menghapus data ini? Data yang terkait juga akan ikut terhapus')" .>
+                                                <a href="{{ route('kelas.edit', $data->id) }}" class="btn btn-warning d-inline"><i class="fas fa-edit"></i></a>
+                                                <form action="{{ route('kelas.destroy', $data->id) }}" method="POST" class="d-inline" onclick="return confirm('Apa yakin ingin menghapus data ini? Data yang terkait juga akan ikut terhapus')" .>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" data-id="{{ $data->id }}" class="btn btn-danger d-inline"><i class="fas fa-trash-alt"></i></button>
@@ -45,7 +40,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data Kosong. Klik "Tambahkan Siswa" untuk tambah data</td>
+                                            <td colspan="6" class="text-center">Data Kosong. Klik "Tambahkan Kelas" untuk tambah data</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

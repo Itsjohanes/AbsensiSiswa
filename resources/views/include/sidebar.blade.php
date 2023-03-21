@@ -28,6 +28,13 @@
 					</a>
 				</li>
 
+				<li class="nav-item {{ Request::is('kelas') ? 'active' : '' }}">
+					<a href="/kelas">
+						<i class="fas fa-home text-primary]"></i>
+						<p>Kelas</p>
+						<span class="badge badge-count badge-danger">{{ \App\Models\Kelas::count() }}</span>
+					</a>
+				</li>
 
 
 				<li class="nav-item {{ Request::is('laporan-absensi') ? 'active' : '' }}">
