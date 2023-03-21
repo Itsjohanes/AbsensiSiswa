@@ -23,8 +23,14 @@ class HomeController extends Controller
         $siswa_absen = SiswaAbsen::where('tgl', $tanggal)->count();
 
         $detail_siswa = SiswaAbsen::where('tgl', $tanggal)->get();
+        
+        //Agar tidak terjadi division by zero
+        if ($siswa == 0) {
+            $persen_siswa = 0;
+        } else {
+            $persen_siswa = ((SiswaAbsen::where('tgl', $tanggal)->count()) / (Siswa::count())) * 100;
+        }
 
-        $persen_siswa = ((SiswaAbsen::where('tgl', $tanggal)->count()) / (Siswa::count())) * 100;
 
         return view('pages.home', compact('admin',  'siswa', 'siswa_absen',  'detail_siswa',  'tanggal', 'persen_siswa'));
     }

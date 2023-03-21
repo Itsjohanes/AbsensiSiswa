@@ -148,12 +148,16 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
+
         $kelas = Kelas::find($id);
-
-        $kelas->delete();
-
-        Alert::success('Berhasil', 'Siswa berhasil dihapus');
-
-        return redirect('/kelas');
+        //hapus jika tidak ada foreignkey di table siswa
+        if ($kelas->siswa->count() == 0) {
+            $kelas->delete();
+            Alert::success('Berhasil', 'Kelas berhasil dihapus');
+            return redirect('/kelas');
+        } else {
+            Alert::error('Gagal', 'Kelas tidak bisa dihapus karena masih ada siswa');
+            return redirect('/kelas');
+        }
     }
 }

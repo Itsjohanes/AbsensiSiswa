@@ -14,15 +14,9 @@ class Kelas extends Model
     protected $fillable = ['kelas'];
 
 
-    /*
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user');
-    }
 
-    public function siswa_absen()
+    public function siswa()
     {
-        return $this->hasMany(SiswaAbsen::class, 'id_siswa');
+        return $this->hasMany(Siswa::class, 'id_kelas');
     }
-    */
 }

@@ -32,7 +32,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('pages.siswa.create');
+        //berikan value untuk kelas dan kirimkan ke view
+        $kelas = DB::table('kelas')->get();
+        return view('pages.siswa.create', compact('kelas'));
     }
 
     /**
@@ -49,6 +51,7 @@ class SiswaController extends Controller
             'konfirmasi_password'   => 'required|min:8',
             'email'                 => 'required|email|unique:users',
             'nisn'                   => 'required|numeric|unique:siswa',
+            'id_kelas'                  => 'required',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -64,13 +67,15 @@ class SiswaController extends Controller
             'email.required'                => 'Email wajib diisi',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
-            'nisn.required'                  => 'NIP wajib diisi',
-            'nisn.unique'                    => 'NIP sudah terdaftar',
+            'nisn.required'                  => 'NISN wajib diisi',
+            'nisn.unique'                    => 'NISN sudah terdaftar',
+            'id_kelas.required'                 => 'Kelas wajib dipilih',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
         ];
 
+        //masukan juga kelas
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
@@ -112,9 +117,11 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
+        $kelas = DB::table('kelas')->get();
+
         $siswa = Siswa::find($id);
 
-        return view('pages.siswa.edit', compact('siswa'));
+        return view('pages.siswa.edit', compact('siswa', 'kelas'));
     }
 
     /**
@@ -126,12 +133,14 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $siswa = Siswa::find($id);
 
         $rules = [
             'name'                  => 'required',
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
+            'id_kelas'                  => 'required',
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
             'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
             'no_hp'                 => 'required|numeric',
@@ -147,6 +156,7 @@ class SiswaController extends Controller
             'konfirmasi_password.required'  => 'Konfirmasi password wajib diisi',
             'konfirmasi_password.min'       => 'Konfirmasi password minimal 8 karakter',
             'email.required'                => 'Email wajib diisi',
+            'id_kelas.required'                 => 'Kelas wajib dipilih',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
             'nisn.required'                  => 'NIP wajib diisi',
@@ -165,6 +175,7 @@ class SiswaController extends Controller
 
 
         $siswa->nisn = $request->nisn;
+        $siswa->id_kelas = $request->id_kelas;
         $siswa->no_hp = $request->no_hp;
         $siswa->alamat = $request->alamat;
         $siswa->save();

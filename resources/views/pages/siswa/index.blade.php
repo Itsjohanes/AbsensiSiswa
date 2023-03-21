@@ -22,6 +22,7 @@
                                         <th class="text-center">No</th>
                                         <th>Nama</th>
                                         <th class="text-center">NISN</th>
+                                        <th class="text-center">Kelas</th>
                                         <th>Alamat</th>
                                         <th>Nomor Handphone</th>
                                         <th class="text-center">Action</th>
@@ -32,6 +33,7 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->user->name }}</td>
                                             <td class="text-center">{{ $data->nisn }}</td>
+                                            <td class="text-center">{{ $data->kelas->kelas }}</td>
                                             <td>{{ $data->alamat }}</td>
                                             <td>{{ $data->no_hp }}</td>
                                             <td class="text-center">
@@ -45,7 +47,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data Kosong. Klik "Tambahkan Siswa" untuk tambah data</td>
+                                            <td colspan="7" class="text-center">Data Kosong. Klik "Tambahkan Siswa" untuk tambah data</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

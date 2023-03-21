@@ -11,7 +11,7 @@ class Siswa extends Model
 
     protected $table = 'siswa';
 
-    protected $fillable = ['id_user', 'nisn', 'no_hp', 'alamat'];
+    protected $fillable = ['id_user', 'id_kelas', 'nisn', 'no_hp', 'alamat'];
 
     public function user()
     {
@@ -21,5 +21,9 @@ class Siswa extends Model
     public function siswa_absen()
     {
         return $this->hasMany(SiswaAbsen::class, 'id_siswa');
+    }
+    function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
     }
 }

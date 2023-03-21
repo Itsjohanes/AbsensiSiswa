@@ -51,6 +51,16 @@
                                     <label for="name">NISN</label>
                                     <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Masukkan NISN">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="name">Kelas</label>
+                                    <select name="id_kelas" id="id_kelas" class="form-control">
+                                        <option value="">Pilih Kelas</option>
+                                        @foreach ($kelas as $item)
+                                        <option value="{{ $item->id }}">{{ $item->kelas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Nomor Handphone</label>
                                     <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor Handphone">

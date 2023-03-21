@@ -50,8 +50,17 @@
                                     <input type="text" class="form-control" id="name" name="name" value="{{ $siswa->user->name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">NIP</label>
+                                    <label for="name">NISN</label>
                                     <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $siswa->nisn }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Kelas</label>
+                                    <select name="id_kelas" id="id_kelas" class="form-control">
+                                        <option value="">Pilih Kelas</option>
+                                        @foreach ($kelas as $item)
+                                        <option value="{{ $item->id }}" {{ $siswa->kelas->kelas == $item->kelas ? 'selected' : '' }}>{{ $item->kelas }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Nomor Handphone</label>
