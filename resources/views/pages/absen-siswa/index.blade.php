@@ -109,7 +109,7 @@
                                         <th scope="col">Tanggal</th>
                                         <th scope="col">Jam Masuk</th>
                                         <th scope="col">Jam Keluar</th>
-                                        <th scope="col">Total Jam Kerja</th>
+                                        <th scope="col">Total Jam Belajar</th>
                                         <th scope="col">Keterangan Masuk</th>
                                     </tr>
                                 </thead>
@@ -121,7 +121,7 @@
                                         <td>{{ $data->jam_keluar ?? '-' }}</td>
                                         <td>{{ $data->jam_kerja ?? '-' }}</td>
                                         {{-- <td>{{ $data->jam_masuk > strtotime('15:00:00') ? 'Terlambat' : 'Tepat Waktu' }}</td> --}}
-                                        @if($data->jam_masuk > ('08:15:00'))
+                                        @if($data->jam_masuk > ('07:00:00'))
                                         <td class="text-danger">Terlambat</td>
                                         @else
                                         <td class="text-success">Tepat Waktu</td>

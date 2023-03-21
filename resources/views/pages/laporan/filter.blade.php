@@ -55,7 +55,7 @@
                                         <td>Nama Siswa</td>
                                         <td>Jam Masuk</td>
                                         <td>Jam Keluar</td>
-                                        <td>Jumlah Jam Kerja</td>
+                                        <td>Jumlah Jam Belajar</td>
                                         <td>Keterangan Masuk</td>
                                     </tr>
                                 </thead>
@@ -68,7 +68,7 @@
                                         <td>{{ $data->jam_masuk }}</td>
                                         <td>{{ $data->jam_keluar }}</td>
                                         <td>{{ $data->jam_kerja }}</td>
-                                        @if($data->jam_masuk > ('08:15:00'))
+                                        @if($data->jam_masuk > ('07:00:00'))
                                         <td class="text-danger">Terlambat</td>
                                         @else
                                         <td class="text-success">Tepat Waktu</td>
