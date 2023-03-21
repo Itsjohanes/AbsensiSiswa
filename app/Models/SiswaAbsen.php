@@ -9,12 +9,12 @@ class SiswaAbsen extends Model
 {
     use HasFactory;
 
-    protected $table = 'guru_pns_absens';
+    protected $table = 'siswa_absensi';
 
-    protected $fillable = ['id_guru_pns', 'tgl', 'jam_masuk', 'jam_keluar', 'jam_kerja', 'lokasi_absen'];
+    protected $fillable = ['id_siswa', 'tgl', 'jam_masuk', 'jam_keluar', 'jam_kerja', 'lokasi_absen'];
 
     public function guru_pns()
     {
-        return $this->belongsTo(Siswa::class, 'id_guru_pns');
+        return $this->belongsTo(Siswa::class, 'id_siswa');
     }
 }

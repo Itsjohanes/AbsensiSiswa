@@ -48,7 +48,7 @@ class SiswaController extends Controller
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
             'email'                 => 'required|email|unique:users',
-            'nisn'                   => 'required|numeric|unique:guru_p_n_s',
+            'nisn'                   => 'required|numeric|unique:siswa',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -133,7 +133,7 @@ class SiswaController extends Controller
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
-            'nisn'                   => 'required|numeric|', Rule::unique('guru_p_n_s')->ignore($id),
+            'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
