@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-2">
-                                    <a href="" onclick="this.href='/filter-pns/'+ document.getElementById('tglawal').value +
+                                    <a href="" onclick="this.href='/filter/'+ document.getElementById('tglawal').value +
                                     '/' + document.getElementById('tglakhir').value " class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
                                 </div>
                             </div>

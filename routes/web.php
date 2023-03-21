@@ -9,8 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaAbsenController;
-use App\Http\Controllers\GuruPTTController;
-use App\Http\Controllers\GuruPTTAbsenController;
+
 use App\Http\Controllers\LaporanAbsenController;
 use App\Http\Controllers\KoordinatSekolahController;
 
@@ -42,13 +41,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('admin', AdminController::class);
 
-    Route::resource('kepala-sekolah', KepalaSekolahController::class);
 
     Route::resource('siswa', SiswaController::class);
 
-    Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporanPNS']);
-    Route::get('/filter-pns/{tglawal}/{tglakhir}', [LaporanAbsenController::class, 'filterPNS']);
-    Route::get('/cetak-pns/{data1}/{data2}', [LaporanAbsenController::class, 'cetakPNS']);
+    Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
+    Route::get('/filter/{tglawal}/{tglakhir}', [LaporanAbsenController::class, 'filter']);
+    Route::get('/cetak/{data1}/{data2}', [LaporanAbsenController::class, 'cetak']);
 
 
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);

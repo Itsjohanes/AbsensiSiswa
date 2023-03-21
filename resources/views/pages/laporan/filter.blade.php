@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Absensi Guru PNS')
+@section('title', 'Laporan Absensi Siswa')
 
 @push('addon-style')
 <link rel="stylesheet" href="{{ asset('assets/css/datepicker.css') }}">
@@ -11,7 +11,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Absensi Guru PNS</h4>
+                <h4 class="page-title">Absensi Siswa</h4>
                 <div class="btn-group btn-group-page-header ml-auto">
                 </div>
             </div>
@@ -40,9 +40,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-2">
-                                    <a href="" onclick="this.href='/filter-pns/'+ document.getElementById('tglawal').value +
+                                    <a href="" onclick="this.href='/filter/'+ document.getElementById('tglawal').value +
                                     '/' + document.getElementById('tglakhir').value " class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
-                                    <a href="/cetak-pns/{{ $data1 }}/{{ $data2 }}" class="btn btn-danger">Cetak PDF <i class="fas fa-file-pdf"></i></a>
+                                    <a href="/cetak/{{ $data1 }}/{{ $data2 }}" class="btn btn-danger">Cetak PDF <i class="fas fa-file-pdf"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>No</td>
                                         <td>Tanggal</td>
-                                        <td>Nama Guru PNS</td>
+                                        <td>Nama Siswa</td>
                                         <td>Jam Masuk</td>
                                         <td>Jam Keluar</td>
                                         <td>Jumlah Jam Kerja</td>
@@ -95,7 +95,7 @@
 <script src="{{ asset('/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('/assets/js/plugin/bootstrap-datepicker/bootstrap-datepicker.id.js') }}"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#basic-datatables').DataTable();
     });
 </script>
