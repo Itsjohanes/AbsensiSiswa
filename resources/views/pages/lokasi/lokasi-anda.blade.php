@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Lokasi Sekolah')
+@section('title', 'Lokasi Anda')
 
 @push('addon-style')
 <style>
@@ -34,34 +34,18 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Lokasi Sekolah</h4>
+                <h4 class="page-title">Lokasi Anda</h4>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header text-danger">
-                            Fitur ini digunakan untuk menyesuaikan koordinat guru dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata
+                        <div class="card-header">
+                            Lokasi Anda
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="map"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form action="ubah-koordinat" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="">Latitude</label>
-                                            <input type="text" class="form-control" name="latitude" value="{{ $koord->latitude }}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Longitude</label>
-                                            <input type="text" class="form-control" name="longitude" value="{{ $koord->longitude }}" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-success btn-round">Simpan Koordinat</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -97,56 +81,76 @@
     // }
 
 
-    function initMap() {
+    // function initMap() {
 
 
-        const myLatlng = {
-            lat: {
-                {
-                    $koord -> latitude
-                }
-            },
-            lng: {
-                {
-                    $koord -> longitude
-                }
-            }
-        };
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 16,
-            center: myLatlng,
-        });
+    //     const myLatlng = { lat: -0.8814592, lng: 119.87189760000001 };
+    //     const map = new google.maps.Map(document.getElementById("map"), {
+    //         zoom: 17,
+    //         center: myLatlng,
+    //     });
 
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-        });
-
-        // Create the initial InfoWindow.
-        let infoWindow = new google.maps.InfoWindow({
-            content: "Klik untuk mendapatkan koordinat lokasi di GMaps",
-            position: myLatlng,
-        });
-
-        infoWindow.open(map);
-        // Configure the click listener.
-        map.addListener("click", (mapsMouseEvent) => {
-            // Close the current InfoWindow.
-            infoWindow.close();
-            // Create a new InfoWindow.
-            infoWindow = new google.maps.InfoWindow({
-                position: mapsMouseEvent.latLng,
-            });
-            infoWindow.setContent(
-                JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-            );
-            infoWindow.open(map);
-        });
-    }
+    //     var marker = new google.maps.Marker({
+    //         position: myLatlng,
+    //         map: map,
+    //     });
+    // }
 
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you. -5.665431872322224, 122.62142281138496
+    let map, infoWindow;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+                lat: -5.665431872322224,
+                lng: 122.62142281138496
+            },
+            zoom: 16,
+        });
+        infoWindow = new google.maps.InfoWindow();
+
+        const locationButton = document.createElement("button");
+
+        locationButton.textContent = "Ketuk untuk melihat lokasi anda";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+        locationButton.addEventListener("click", () => {
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent("Lokasi ditemukan!");
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                // Peramban tidak mendukung geolokasi
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        });
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(
+            browserHasGeolocation ?
+            "Error: Layanan Geolokasi Gagal." :
+            "Error: Peramban anda tidak mendukung layanan geolokasi."
+        );
+        infoWindow.open(map);
+    }
 </script>
 @endpush
