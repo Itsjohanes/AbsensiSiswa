@@ -20,6 +20,6 @@ class Siswa extends Model
 
     public function siswa_absen()
     {
-        return $this->hasMany(SiswaAbsen::class, 'id_guru_pns');
+        return $this->hasMany(SiswaAbsen::class, 'id_siswa');
     }
 }

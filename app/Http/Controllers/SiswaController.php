@@ -20,9 +20,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $guru_pns = Siswa::with('user')->get();
+        $siswa = Siswa::with('user')->get();
 
-        return view('pages.siswa.index', compact('guru_pns'));
+        return view('pages.siswa.index', compact('siswa'));
     }
 
     /**
@@ -112,9 +112,9 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        $guru_pns = Siswa::find($id);
+        $siswa = Siswa::find($id);
 
-        return view('pages.siswa.edit', compact('guru_pns'));
+        return view('pages.siswa.edit', compact('siswa'));
     }
 
     /**
@@ -126,7 +126,7 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $guru_pns = Siswa::find($id);
+        $siswa = Siswa::find($id);
 
         $rules = [
             'name'                  => 'required',
@@ -164,12 +164,12 @@ class SiswaController extends Controller
         }
 
 
-        $guru_pns->nisn = $request->nisn;
-        $guru_pns->no_hp = $request->no_hp;
-        $guru_pns->alamat = $request->alamat;
-        $guru_pns->save();
+        $siswa->nisn = $request->nisn;
+        $siswa->no_hp = $request->no_hp;
+        $siswa->alamat = $request->alamat;
+        $siswa->save();
 
-        $user = User::find($guru_pns->id_user);
+        $user = User::find($siswa->id_user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
@@ -188,13 +188,13 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $guru_pns = Siswa::find($id);
-        if ($guru_pns->siswa_absen()->count()) {
+        $siswa = Siswa::find($id);
+        if ($siswa->siswa_absen()->count()) {
             Alert::error('Gagal', 'Siswa ini sudah memiliki riwayat absen');
             return redirect()->back();
         } else {
-            $user = User::where('id', $guru_pns->id_user)->delete();
-            $guru_pns->delete();
+            $user = User::where('id', $siswa->id_user)->delete();
+            $siswa->delete();
 
             Alert::success('Berhasil', 'Siswa berhasil dihapus');
 

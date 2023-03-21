@@ -13,7 +13,7 @@ class SiswaAbsen extends Model
 
     protected $fillable = ['id_siswa', 'tgl', 'jam_masuk', 'jam_keluar', 'jam_kerja', 'lokasi_absen'];
 
-    public function guru_pns()
+    public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'id_siswa');
     }

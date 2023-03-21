@@ -27,7 +27,7 @@
                                         <th class="text-center">Action</th>
                                     </thead>
                                     <tbody>
-                                        @forelse($guru_pns as $data)
+                                        @forelse($siswa as $data)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->user->name }}</td>

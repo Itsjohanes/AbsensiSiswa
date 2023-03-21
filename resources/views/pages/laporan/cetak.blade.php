@@ -55,7 +55,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ \Carbon\Carbon::parse($data->tgl)->locale('id')->isoFormat('LL') }}</td>
-                        <td>{{ $data->guru_pns->user->name }}</td>
+                        <td>{{ $data->siswa->user->name }}</td>
                         <td>{{ $data->jam_masuk }}</td>
                         <td>{{ $data->jam_keluar }}</td>
                         <td>{{ $data->jam_kerja }}</td>

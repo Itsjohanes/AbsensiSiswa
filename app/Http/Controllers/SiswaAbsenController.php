@@ -32,8 +32,8 @@ class SiswaAbsenController extends Controller
         // $cek = $tanggal == $carbon ? 'sama' :'tidak sama';
 
         // return $cek;
-        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
-        $data_absen = SiswaAbsen::where('id_siswa', '=', $guru_pns->id)->get();
+        $siswa = Siswa::where('id_user', auth()->user()->id)->first();
+        $data_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->get();
         return view('pages.absen-siswa.index', compact('data_absen'));
     }
 
@@ -56,7 +56,7 @@ class SiswaAbsenController extends Controller
     public function store(Request $request)
     {
         // mendapatkan data login dari pns
-        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
+        $siswa = Siswa::where('id_user', auth()->user()->id)->first();
 
         // data tanggal hari ini
         $timezone = 'Asia/Jakarta';
@@ -69,7 +69,7 @@ class SiswaAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = SiswaAbsen::where('id_siswa', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
+        $pns_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
         if ($pns_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
@@ -81,7 +81,7 @@ class SiswaAbsenController extends Controller
             } else {
 
                 SiswaAbsen::create([
-                    'id_siswa' => $guru_pns->id,
+                    'id_siswa' => $siswa->id,
                     'tgl'         => $tanggal,
                     'jam_masuk'    => $localtime
                 ]);
@@ -139,7 +139,7 @@ class SiswaAbsenController extends Controller
 
     public function absenKeluar(Request $request)
     {
-        $guru_pns = Siswa::where('id_user', auth()->user()->id)->first();
+        $siswa = Siswa::where('id_user', auth()->user()->id)->first();
 
         $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
@@ -151,7 +151,7 @@ class SiswaAbsenController extends Controller
 
         $jarak = $this->distance($request->lat, $request->lng, $koord->latitude, $koord->longitude, "K"); // <-- dihitung menggunakan satuan kilometer
 
-        $pns_absen = SiswaAbsen::where('id_siswa', '=', $guru_pns->id)->where('tgl', '=', $tanggal)->first();
+        $pns_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
         if ($pns_absen) {
             if ($pns_absen->jam_keluar == "") {

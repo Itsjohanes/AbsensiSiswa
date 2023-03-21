@@ -16,7 +16,7 @@
                             <h4 class="card-title text-white">Edit Siswa</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('siswa.update', $guru_pns->id) }}" method="POST">
+                            <form action="{{ route('siswa.update', $siswa->id) }}" method="POST">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>
@@ -31,7 +31,7 @@
                                 <h3>Data Akun</h3>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ $guru_pns->user->email }}">
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ $siswa->user->email }}">
                                     <small id="emailHelp2" class="form-text text-muted">Email tidak boleh sama dengan user lain</small>
                                 </div>
                                 <div class="form-group">
@@ -47,19 +47,19 @@
                                 <h3>Data Profil</h3>
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $guru_pns->user->name }}">
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $siswa->user->name }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">NIP</label>
-                                    <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $guru_pns->nisn }}">
+                                    <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $siswa->nisn }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Nomor Handphone</label>
-                                    <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $guru_pns->no_hp }}">
+                                    <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $siswa->no_hp }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Alamat</label>
-                                    <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10">{{ $guru_pns->alamat }}</textarea>
+                                    <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10">{{ $siswa->alamat }}</textarea>
                                 </div>
                                 <a href="/siswa" class="btn btn-warning">Kembali</a>
                                 <button type="submit" class="btn btn-success">Simpan</button>
