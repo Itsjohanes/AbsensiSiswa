@@ -29,44 +29,14 @@
 				</li>
 
 
-				{{-- <li class="nav-item {{ (Request::is('laporan-absensi'))  ? 'show' : ''}} submenu">
-				<a data-toggle="collapse" href="#base">
-					<i class="fas fa-layer-group"></i>
-					<p>Laporan Absensi</p>
-					<span class="caret"></span>
-				</a>
-				<div class="collapse show" id="base">
-					<ul class="nav nav-collapse">
-						<li class="{{ Request::is('laporan-absensi') ? 'active' : '' }}">
-							<a href="../components/avatars.html">
-								<span class="sub-item">Siswa/span>
-							</a>
-						</li>
-						<li>
 
-						</li>
-					</ul>
-				</div>
-				</li> --}}
-
-
-				<li class="nav-item {{ (Request::is('laporan-absensi'))  ? 'active submenu' : ''}}">
-					<a data-toggle="collapse" href="#tables">
+				<li class="nav-item {{ Request::is('laporan-absensi') ? 'active' : '' }}">
+					<a href="/laporan-absensi">
 						<i class="fas fa-table text-primary"></i>
 						<p>Laporan Absensi</p>
-						<span class="caret"></span>
 					</a>
-					<div class="collapse {{ (Request::is('laporan-absensi')) ? 'show' : ''}}" id="tables">
-						<ul class="nav nav-collapse">
-							<li class="{{ Request::is('laporan-absensi') ? 'active' : '' }}">
-								<a href="/laporan-absensi">
-									<span class="sub-item">Siswa</span>
-								</a>
-							</li>
-
-						</ul>
-					</div>
 				</li>
+
 				<li class="nav-item {{ Request::is('lokasi-sekolah') ? 'active' : '' }}">
 					<a href="/lokasi-sekolah">
 						<i class="fas fa-map-marker-alt text-success"></i>
