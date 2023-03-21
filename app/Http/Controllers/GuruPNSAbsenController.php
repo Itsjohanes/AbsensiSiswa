@@ -154,7 +154,7 @@ class GuruPNSAbsenController extends Controller
 
         if ($pns_absen) {
             if ($pns_absen->jam_keluar == "") {
-                if ($jarak < 0.015) {
+                if ($jarak < 0.2) {
                     $pns_absen->update([
                         'jam_keluar' => $localtime,
                         'jam_kerja' => date('H:i:s', strtotime($localtime) - strtotime($pns_absen->jam_masuk))

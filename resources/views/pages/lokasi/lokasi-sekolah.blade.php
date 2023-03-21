@@ -8,25 +8,25 @@
         height: 500px;
         width: 100%;
     }
+    
+   .custom-map-control-button {
+     background-color: #fff;
+     border: 0;
+     border-radius: 2px;
+     box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+     margin: 10px;
+     padding: 0 0.5em;
+     font: 400 18px Roboto, Arial, sans-serif;
+     overflow: hidden;
+     height: 40px;
+     cursor: pointer;
+   }
+   .custom-map-control-button:hover {
+     background: #ebebeb;
+   }
 
-    .custom-map-control-button {
-        background-color: #fff;
-        border: 0;
-        border-radius: 2px;
-        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-        margin: 10px;
-        padding: 0 0.5em;
-        font: 400 18px Roboto, Arial, sans-serif;
-        overflow: hidden;
-        height: 40px;
-        cursor: pointer;
-    }
-
-    .custom-map-control-button:hover {
-        background: #ebebeb;
-    }
 </style>
-
+    
 @endpush
 
 @section('content')
@@ -75,7 +75,8 @@
 
 @push('addon-script')
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiCgqFCjR9uNOe1BJ9-QN8-SS6r6d07Ik&callback=initMap&libraries=&v=weekly" async></script>
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiCgqFCjR9uNOe1BJ9-QN8-SS6r6d07Ik&callback=initMap&libraries=&v=weekly" async></script>
 
 <script type="text/javascript">
     // getLocation();
@@ -95,23 +96,12 @@
     //     document.getElementById('lat').value = lat;
     //     document.getElementById('lng').value = lng;
     // }
-
+    
 
     function initMap() {
 
 
-        const myLatlng = {
-            lat: {
-                {
-                    $koord - > latitude
-                }
-            },
-            lng: {
-                {
-                    $koord - > longitude
-                }
-            }
-        };
+        const myLatlng = { lat: {{$koord->latitude}}, lng: {{$koord->longitude}} };
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 16,
             center: myLatlng,
@@ -127,10 +117,10 @@
             content: "Klik untuk mendapatkan koordinat lokasi di GMaps",
             position: myLatlng,
         });
-
+    
         infoWindow.open(map);
         // Configure the click listener.
-        map.addListener("click", (mapsMouseEvent) => {
+            map.addListener("click", (mapsMouseEvent) => {
             // Close the current InfoWindow.
             infoWindow.close();
             // Create a new InfoWindow.
@@ -148,5 +138,6 @@
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you. -5.665431872322224, 122.62142281138496
+  
 </script>
 @endpush

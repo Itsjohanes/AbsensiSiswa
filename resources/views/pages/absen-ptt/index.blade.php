@@ -1,13 +1,13 @@
 @extends('layout.app')
 
-@section('title', 'Absensi Siswa')
+@section('title', 'Absensi Guru GTT')
 
 @section('content')
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Absensi Siswa</h4>
+                <h4 class="page-title">Absensi Guru GTT</h4>
                 <div class="btn-group btn-group-page-header ml-auto">
                 </div>
             </div>
@@ -22,8 +22,8 @@
                             <div class="card-detail">
                                 <p>Catatan:</p>
                                 <ul>
-                                    <li>Untuk bisa melakukan absensi, guru harus berada dalam radius kurang dari 200m dari jarak sekolah</li>
-                                    <li>Jika jarak guru melebihi 200m, absensi tidak bisa dilakukan dan muncul pesan peringatan agar melakukan absensi dalam lingkungan sekolah</li>
+                                    <li>Untuk bisa melakukan absensi, guru harus berada dalam radius kurang dari 15m dari jarak sekolah</li>
+                                    <li>Jika jarak guru melebihi 15m, absensi tidak bisa dilakukan dan muncul pesan peringatan agar melakukan absensi dalam lingkungan sekolah</li>
                                     <li>Absen masuk dan absen keluar hanya bisa dilakukan sekali dalam sehari</li>
                                 </ul>
                             </div>
@@ -37,10 +37,10 @@
                         <div class="card-body text-center">
                             <div class="card-opening">Absen Masuk</div>
                             <div class="card-desc">
-
+                                
                             </div>
                             <div class="card-detail">
-                                <form action="{{ route('absen-guru-pns.store') }}" method="POST">
+                                <form action="{{ route('absen-guru-ptt.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="lat" name="lat">
                                     <input type="hidden" id="lng" name="lng">
@@ -55,11 +55,10 @@
                         <div class="card-body text-center">
                             <div class="card-opening">Absen Keluar</div>
                             <div class="card-desc">
-
+                                
                             </div>
                             <div class="card-detail">
-
-                                <form action="{{ route('absen-pns-keluar') }}" method="POST">
+                                <form action="{{ route('absen-ptt-keluar') }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="lat1" name="lat">
                                     <input type="hidden" id="lng1" name="lng">
@@ -77,7 +76,7 @@
                             <div class="card-title text-center text-white">Fitur Pengujian</div>
                         </div>
                         <div class="card-body">
-                            <h3 class="text-danger">Fitur ini digunakan untuk menyesuaikan koordinat guru dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata</h3>
+                            <h3>Fitur ini digunakan untuk menyesuaikan koordinat guru dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata</h3>
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -99,11 +98,11 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 pl-md-0">
                     <div class="card card-annoucement card-round">
-                        <div class="card-header text-center bg-primary">
+                        <div class="card-header text-center bg-info">
                             <div class="card-title text-center text-white">Detail absen {{ auth()->user()->name }}</div>
                         </div>
                         <div class="card-body">
-                            <table id="basic-datatables" class="table table-head-bg-primary">
+                            <table id="basic-datatables" class="table table-head-bg-info">
                                 <thead>
                                     <tr>
                                         <th scope="col">Tanggal</th>
@@ -120,7 +119,6 @@
                                         <td>{{ $data->jam_masuk }}</td>
                                         <td>{{ $data->jam_keluar ?? '-' }}</td>
                                         <td>{{ $data->jam_kerja ?? '-' }}</td>
-                                        {{-- <td>{{ $data->jam_masuk > strtotime('15:00:00') ? 'Terlambat' : 'Tepat Waktu' }}</td> --}}
                                         @if($data->jam_masuk > ('08:15:00'))
                                         <td class="text-danger">Terlambat</td>
                                         @else
@@ -147,16 +145,12 @@
 <!-- Datatables -->
 <script src="{{ asset('/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#basic-datatables').DataTable();
     });
 
-    window.setTimeout(function() {
-        document.getElementById('absenMasuk').removeAttribute('disabled')
-    }, 5000);
-    window.setTimeout(function() {
-        document.getElementById('absenKeluar').removeAttribute('disabled')
-    }, 5000);
+    window.setTimeout(function(){ document.getElementById('absenMasuk').removeAttribute('disabled') }, 5000); 
+    window.setTimeout(function(){ document.getElementById('absenKeluar').removeAttribute('disabled') }, 5000); 
 
     getLocation();
 
@@ -164,7 +158,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else {
-            alert('Geolocation tidak didukung oleh peramban ini');
+            alert('Geolocation tidak didukung oleh peramban ini, sehingga proses absensi tidak bisa dilakukan.');
         }
     }
 
@@ -179,5 +173,7 @@
         document.getElementById('latTest').value = lat;
         document.getElementById('lngTest').value = lng;
     }
+
+
 </script>
 @endpush

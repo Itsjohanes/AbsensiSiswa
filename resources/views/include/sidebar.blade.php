@@ -79,7 +79,7 @@
 				<li class="nav-item {{ Request::is('absen-guru-pns') ? 'active' : '' }}">
 					<a href="/absen-guru-pns">
 						<i class="fas fa-clipboard-list text-warning"></i>
-						<p>Absen Guru PNS</p>
+						<p>Absensi Siswa</p>
 					</a>
 				</li>
 				<li class="nav-item {{ Request::is('lokasi-anda') ? 'active' : '' }}">
@@ -90,20 +90,7 @@
 				</li>
 				@endif
 
-				@if (auth()->user()->level == 'guru_ptt')
-				<li class="nav-item {{ Request::is('absen-guru-ptt') ? 'active' : '' }}">
-					<a href="/absen-guru-ptt">
-						<i class="fas fa-clipboard-list text-warning"></i>
-						<p>Absen Guru GTT</p>
-					</a>
-				</li>
-				<li class="nav-item {{ Request::isx('lokasi-anda') ? 'active' : '' }}">
-					<a href="/lokasi-anda">
-						<i class="fas fa-map-marker-alt text-success"></i>
-						<p>Lokasi Anda</p>
-					</a>
-				</li>
-				@endif
+
 			</ul>
 		</div>
 	</div>
