@@ -18,17 +18,14 @@ class HomeController extends Controller
         $tanggal = $date->format('Y-m-d');
 
         $admin = Admin::count();
-        $guru_pns = Siswa::count();
+        $siswa = Siswa::count();
 
-        // menghitung guru2 yang sudah hadir hari ini
-        $pns_absen = SiswaAbsen::where('tgl', $tanggal)->count();
+        $siswa_absen = SiswaAbsen::where('tgl', $tanggal)->count();
 
-        // mendapatkan list guru2 yang sudah absen hari ini
-        $detail_pns = SiswaAbsen::where('tgl', $tanggal)->get();
+        $detail_siswa = SiswaAbsen::where('tgl', $tanggal)->get();
 
-        // persentase kehadiran guru pns dan ptt
-        $persen_pns = ((SiswaAbsen::where('tgl', $tanggal)->count()) / (Siswa::count())) * 100;
+        $persen_siswa = ((SiswaAbsen::where('tgl', $tanggal)->count()) / (Siswa::count())) * 100;
 
-        return view('pages.home', compact('admin',  'guru_pns', 'pns_absen',  'detail_pns',  'tanggal', 'persen_pns'));
+        return view('pages.home', compact('admin',  'siswa', 'siswa_absen',  'detail_siswa',  'tanggal', 'persen_siswa'));
     }
 }

@@ -47,7 +47,7 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Siswa</p>
-                                        <h4 class="card-title">{{ $guru_pns }}</h4>
+                                        <h4 class="card-title">{{ $siswa }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     <div class="row align-items-center mb-2">
                                         <div class="col-md-4"></div>
                                         <div class="col-md-4 mx-auto">
-                                            <div id="persentase-pns"></div>
+                                            <div id="persentase-siswa"></div>
                                         </div>
                                         <div class="col-md-4"></div>
                                     </div>
@@ -81,7 +81,7 @@
                                         <div class="col col-stats ml-3 ml-sm-0">
                                             <div class="numbers">
                                                 <p class="card-category">Jumlah absen Siswa hari ini</p>
-                                                <h4 class="card-title">{{ $pns_absen }}</h4>
+                                                <h4 class="card-title">{{ $siswa_absen }}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -98,9 +98,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($detail_pns as $data)
+                                    @forelse($detail_siswa as $data)
                                     <tr>
-                                        <td>{{ $data->guru_pns->user->name }}</td>
+                                        <td>{{ $data->siswa->user->name }}</td>
                                         <td>{{ $data->jam_masuk }}</td>
                                         <td>{{ $data->jam_keluar ?? '-' }}</td>
                                         <td>{{ $data->jam_kerja ?? '-' }}</td>
@@ -131,9 +131,9 @@
 <script src="{{ asset('/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 <script>
     Circles.create({
-        id: 'persentase-pns',
+        id: 'persentase-siswa',
         radius: 75,
-        value: JSON.parse('<?php echo json_encode($persen_pns); ?>'),
+        value: JSON.parse('<?php echo json_encode($persen_siswa); ?>'),
         maxValue: 100,
         width: 7,
         text: function(value) {

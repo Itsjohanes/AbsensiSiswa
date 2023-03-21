@@ -80,7 +80,7 @@ class SiswaController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'level' => 'guru_pns',
+            'level' => 'siswa',
             'password' => $request->password,
         ]);
 

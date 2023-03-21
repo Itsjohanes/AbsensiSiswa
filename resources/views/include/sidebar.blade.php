@@ -75,7 +75,7 @@
 				</li>
 
 				@endif
-				@if (auth()->user()->level == 'guru_pns')
+				@if (auth()->user()->level == 'siswa')
 				<li class="nav-item {{ Request::is('absen-siswa') ? 'active' : '' }}">
 					<a href="/absen-siswa">
 						<i class="fas fa-clipboard-list text-warning"></i>

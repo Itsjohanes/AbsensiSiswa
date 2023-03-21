@@ -28,7 +28,7 @@ Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin,kepsek,guru_pns,guru_ptt']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:admin,siswa']], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'ceklevel:guru_pns']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 
     Route::resource('absen-siswa', SiswaAbsenController::class);
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru_pns']], function () {
 
 
 
-Route::group(['middleware' => ['auth', 'ceklevel:guru_pns']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 
     Route::view('lokasi-anda', 'pages.lokasi.lokasi-anda');
 });
