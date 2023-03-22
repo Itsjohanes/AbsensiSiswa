@@ -54,7 +54,8 @@
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <a href="" onclick="this.href='/filter/'+ document.getElementById('tglawal').value +
-                                    '/' + document.getElementById('tglakhir').value " class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
+                                    '/' + document.getElementById('tglakhir').value +
+                                    '/' + document.getElementById('id_kelas').value" class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
                                     <a href="/cetak/{{ $data1 }}/{{ $data2 }}/{{ $data3 }}" class="btn btn-danger">Cetak PDF <i class="fas fa-file-pdf"></i></a>
                                 </div>
                             </div>
