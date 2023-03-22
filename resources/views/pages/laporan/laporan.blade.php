@@ -25,21 +25,34 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="label">Tanggal Awal</label>
                                         <input type="date" name="tglawal" id="tglawal" class="form-control" data-date-format="yyyy-mm-dd" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="label">Tanggal Akhir</label>
                                         <input type="date" name="tglakhir" id="tglakhir" class="form-control" data-date-format="yyyy-mm-dd" />
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="label">Kelas</label>
+                                        <select name="id_kelas" id="id_kelas" class="form-control">
+                                            <option value="">Pilih Kelas</option>
+                                            @foreach ($kelas as $k)
+                                            <option value="{{ $k->id }}">{{ $k->kelas }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 mt-2">
                                     <a href="" onclick="this.href='/filter/'+ document.getElementById('tglawal').value +
-                                    '/' + document.getElementById('tglakhir').value " class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
+                                    '/' + document.getElementById('tglakhir').value +
+                                    '/' + document.getElementById('id_kelas').value " class="btn btn-info">Lihat <i class="fas fa-print"></i></a>
                                 </div>
                             </div>
                         </div>

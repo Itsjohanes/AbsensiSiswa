@@ -32,7 +32,14 @@
     </div>
     <hr>
     <br>
-    <h2 class="text-center">LAPORAN ABSENSI SISWA</h2>
+    <h4 class="text-center">Laporan Absensi Siswa</h4>
+    <h5 class="text-center">
+        @if ($id_kelas == 0)
+        Semua Kelas
+        @else
+        Kelas {{ $kelas->kelas }}
+        @endif
+    </h5>
     <p class="text-center"><span>Per </span>{{\Carbon\Carbon::parse($tglawal)->locale('id')->isoFormat('LL')}} - {{\Carbon\Carbon::parse($tglakhir)->locale('id')->isoFormat('LL')}}</p>
     <br>
     <div class="row">
