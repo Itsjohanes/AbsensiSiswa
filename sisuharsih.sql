@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 21, 2023 at 02:56 PM
+-- Generation Time: Mar 22, 2023 at 12:43 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -72,6 +72,14 @@ CREATE TABLE `kelas` (
   `updated_at` timestamp NOT NULL,
   `created_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `kelas`, `updated_at`, `created_at`) VALUES
+(5, 'X-A', '2023-03-21 08:34:41', '2023-03-21 08:34:41'),
+(6, 'X-B', '2023-03-21 08:59:54', '2023-03-21 08:59:54');
 
 -- --------------------------------------------------------
 
@@ -146,6 +154,7 @@ CREATE TABLE `siswa` (
   `id` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL,
   `nisn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kelas` int NOT NULL,
   `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -156,8 +165,8 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(2, 4, '198610122022212013', '081934172542', '123', '2023-03-20 22:15:42', '2023-03-21 06:02:42');
+INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `id_kelas`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
+(8, 14, '2029229222', 6, '081934172542', 'padamu', '2023-03-21 15:58:35', '2023-03-21 16:05:11');
 
 -- --------------------------------------------------------
 
@@ -182,7 +191,7 @@ CREATE TABLE `siswa_absensi` (
 --
 
 INSERT INTO `siswa_absensi` (`id`, `id_siswa`, `tgl`, `jam_masuk`, `jam_keluar`, `jam_kerja`, `lokasi_absen`, `created_at`, `updated_at`) VALUES
-(1, 2, '2023-03-21', '18:23:01', '18:34:34', '00:11:33', NULL, '2023-03-21 04:23:01', '2023-03-21 04:34:34');
+(2, 8, '2023-03-22', '07:19:43', '07:41:11', '00:21:28', NULL, '2023-03-21 17:19:43', '2023-03-21 17:41:11');
 
 -- --------------------------------------------------------
 
@@ -208,7 +217,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `level`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Administrator', 'admin', 'admin@gmail.com', NULL, 'admin123', NULL, '2023-03-20 21:24:31', '2023-03-20 21:24:31'),
-(4, 'Johannes Alexander Putra', 'siswa', 'johannes@upi.edu', NULL, '12345678', NULL, '2023-03-20 22:15:42', '2023-03-21 06:02:42');
+(14, 'Johannes Alexander Putra', 'siswa', 'johannes@upi.edu', NULL, '12345678', NULL, '2023-03-21 15:58:35', '2023-03-21 15:58:35');
 
 --
 -- Indexes for dumped tables
@@ -267,7 +276,8 @@ ALTER TABLE `personal_access_tokens`
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `guru_p_n_s_nip_unique` (`nisn`),
-  ADD KEY `guru_p_n_s_id_user_foreign` (`id_user`);
+  ADD KEY `guru_p_n_s_id_user_foreign` (`id_user`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- Indexes for table `siswa_absensi`
@@ -303,7 +313,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `koordinats`
@@ -327,19 +337,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `siswa_absensi`
 --
 ALTER TABLE `siswa_absensi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -355,7 +365,8 @@ ALTER TABLE `admins`
 -- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD CONSTRAINT `guru_p_n_s_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `guru_p_n_s_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`);
 
 --
 -- Constraints for table `siswa_absensi`
