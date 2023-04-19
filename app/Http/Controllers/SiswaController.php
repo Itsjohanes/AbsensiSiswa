@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Imports\ImportSiswa;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -37,6 +39,12 @@ class SiswaController extends Controller
         return view('pages.siswa.create', compact('kelas'));
     }
 
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        Excel::import(new ImportSiswa, $file);
+        return redirect()->back()->with('success', 'Data siswa imported successfully.');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -51,6 +59,8 @@ class SiswaController extends Controller
             'konfirmasi_password'   => 'required|min:8',
             'email'                 => 'required|email|unique:users',
             'nisn'                   => 'required|numeric|unique:siswa',
+            'nis'                    => 'required|numeric|unique:siswa',
+            'tahun_masuk'            => 'required|numeric',
             'id_kelas'                  => 'required',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
@@ -69,6 +79,10 @@ class SiswaController extends Controller
             'email.unique'                  => 'Email sudah terdaftar',
             'nisn.required'                  => 'NISN wajib diisi',
             'nisn.unique'                    => 'NISN sudah terdaftar',
+            'nis.required'                  => 'NIS wajib diisi',
+            'nis.unique'                    => 'NIS sudah terdaftar',
+            'tahun_masuk.required'                => 'Tahun Masuk wajib diisi',
+            'tahun_masuk.numeric'                 => 'Tahun Masuk harus berupa angka',
             'id_kelas.required'                 => 'Kelas wajib dipilih',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
@@ -143,6 +157,8 @@ class SiswaController extends Controller
             'id_kelas'                  => 'required',
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
             'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
+            'nis'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
+            'tahun_masuk'            => 'required|numeric',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -162,6 +178,11 @@ class SiswaController extends Controller
             'nisn.required'                  => 'NIP wajib diisi',
             'nisn.numeric'                   => 'NIP harus berupa angka',
             'nisn.unique'                    => 'NIP sudah terdaftar',
+            'nisn.unique'                    => 'NISN sudah terdaftar',
+            'nis.required'                  => 'NIS wajib diisi',
+            'nis.unique'                    => 'NIS sudah terdaftar',
+            'tahun_masuk.required'                => 'Tahun Masuk wajib diisi',
+            'tahun_masuk.numeric'                 => 'Tahun Masuk harus berupa angka',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -175,6 +196,8 @@ class SiswaController extends Controller
 
 
         $siswa->nisn = $request->nisn;
+        $siswa->nis = $request->nis;
+        $siswa->tahun_masuk = $request->tahun_masuk;
         $siswa->id_kelas = $request->id_kelas;
         $siswa->no_hp = $request->no_hp;
         $siswa->alamat = $request->alamat;

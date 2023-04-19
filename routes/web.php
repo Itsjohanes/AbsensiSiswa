@@ -41,7 +41,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('admin', AdminController::class);
     Route::resource('kelas', KelasController::class);
 
-
     Route::resource('siswa', SiswaController::class);
 
     Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
@@ -51,6 +50,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);
     Route::post('ubah-koordinat', [KoordinatSekolahController::class, 'update']);
+
+    //Import siswa
+    Route::post('/import_excel/import', [SiswaController::class, 'import']);
 });
 
 

@@ -54,6 +54,14 @@
                                     <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $siswa->nisn }}">
                                 </div>
                                 <div class="form-group">
+                                    <label for="name">NIS</label>
+                                    <input type="text" class="form-control" id="nis" name="nis" value="{{ $siswa->nis }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Tahun Masuk</label>
+                                    <input type="text" class="form-control" id="tahun_masuk" name="tahun_masuk" value="{{ $siswa->tahun_masuk }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="name">Kelas</label>
                                     <select name="id_kelas" id="id_kelas" class="form-control">
                                         <option value="">Pilih Kelas</option>

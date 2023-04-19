@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title') | Sistem Absensi Sekolah</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />

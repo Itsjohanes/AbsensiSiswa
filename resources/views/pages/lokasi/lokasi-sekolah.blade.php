@@ -39,9 +39,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header text-danger">
-                            Fitur ini digunakan untuk menyesuaikan koordinat guru dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata
-                        </div>
+
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">

@@ -3,8 +3,10 @@
 @section('title', 'Siswa')
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="main-panel">
     <div class="content">
+        
         <div class="page-inner">
             <div class="page-header">
                 <h4 class="page-title">Siswa</h4>
@@ -14,14 +16,21 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ route('siswa.create') }}" class="btn btn-primary">Tambah Siswa</a>
+                            <form action="{{ url('/import_excel/import')  }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+		                    <input type="file" name="file" required>
+		                    <button type="submit" class="btn btn-success">Upload</button>
+	                        </form>
                         </div>
-                        <div class="card-body">
+                      <div class="card-body">
                             <div class="table-responsive">
                                 <table id="basic-datatables" class="display table table-striped table-hover" cellspacing="0" width="100%">
                                     <thead>
                                         <th class="text-center">No</th>
                                         <th>Nama</th>
                                         <th class="text-center">NISN</th>
+                                        <th class="text-center">NIS</th>
+                                        <th class="text-center">Tahun Masuk</th>
                                         <th class="text-center">Kelas</th>
                                         <th>Alamat</th>
                                         <th>Nomor Handphone</th>
@@ -33,6 +42,8 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $data->user->name }}</td>
                                             <td class="text-center">{{ $data->nisn }}</td>
+                                            <td class="text-center">{{ $data->nis }}</td>
+                                            <td class="text-center">{{ $data->tahun_masuk }}</td>
                                             <td class="text-center">{{ $data->kelas->kelas }}</td>
                                             <td>{{ $data->alamat }}</td>
                                             <td>{{ $data->no_hp }}</td>
@@ -64,6 +75,8 @@
 
 @push('addon-script')
 <!-- Datatables -->
+
+
 <script src="{{ asset('/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function() {

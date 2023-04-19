@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Login | Monitoring Absensi Siswa</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -32,9 +34,7 @@
 		<div class="container container-login animated fadeIn">
 			<div class="row">
 				<div class="col-sm-4"></div>
-				<div class="col-sm-5">
 					<img src="{{ asset('/assets/img/tutwuri.png') }}" style="width: 100px; height: 100px; margin: auto;">
-				</div>
 				<div class="col-sm-3"></div>
 			</div>
 			

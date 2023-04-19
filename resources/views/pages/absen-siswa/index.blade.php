@@ -73,26 +73,8 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 pl-md-0">
                     <div class="card card-annoucement card-round">
-                        <div class="card-header text-center bg-warning">
-                            <div class="card-title text-center text-white">Fitur Pengujian</div>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="text-danger">Fitur ini digunakan untuk menyesuaikan koordinat siswa dan sekolah agar absensi bisa dilakukan, dan hanya sebagai pengujian semata</h3>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Latitude</label>
-                                        <input type="text" class="form-control" name="latTest" id="latTest" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Longitude</label>
-                                        <input type="text" class="form-control" name="lngTest" id="lngTest" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -110,7 +92,7 @@
                                         <th scope="col">Jam Masuk</th>
                                         <th scope="col">Jam Keluar</th>
                                         <th scope="col">Total Jam Belajar</th>
-                                        <th scope="col">Keterangan Masuk</th>
+                                        <th scope="col">Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -134,7 +116,6 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                        </div>
                     </div>
                 </div>
             </div>

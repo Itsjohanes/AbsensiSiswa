@@ -51,7 +51,14 @@
                                     <label for="name">NISN</label>
                                     <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Masukkan NISN">
                                 </div>
-
+                                 <div class="form-group">
+                                    <label for="name">NIS</label>
+                                    <input type="text" class="form-control" id="nis" name="nis" placeholder="Masukkan NIS">
+                                </div>
+                                 <div class="form-group">
+                                    <label for="name">Tahun Masuk</label>
+                                    <input type="text" class="form-control" id="tahun_masuk" name="tahun_masuk" placeholder="Masukkan Tahun Masuk">
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Kelas</label>
                                     <select name="id_kelas" id="id_kelas" class="form-control">
