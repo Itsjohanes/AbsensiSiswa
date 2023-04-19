@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 22, 2023 at 12:43 AM
+-- Generation Time: Apr 19, 2023 at 03:20 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `admins` (
   `id` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL,
-  `nip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,11 +52,11 @@ INSERT INTO `admins` (`id`, `id_user`, `nip`, `no_hp`, `alamat`, `created_at`, `
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -78,8 +78,8 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `kelas`, `updated_at`, `created_at`) VALUES
-(5, 'X-A', '2023-03-21 08:34:41', '2023-03-21 08:34:41'),
-(6, 'X-B', '2023-03-21 08:59:54', '2023-03-21 08:59:54');
+(1, 'X-A', '2023-03-21 08:34:41', '2023-03-21 08:34:41'),
+(2, 'X-B', '2023-03-21 08:59:54', '2023-03-21 08:59:54');
 
 -- --------------------------------------------------------
 
@@ -89,8 +89,8 @@ INSERT INTO `kelas` (`id`, `kelas`, `updated_at`, `created_at`) VALUES
 
 CREATE TABLE `koordinats` (
   `id` bigint UNSIGNED NOT NULL,
-  `latitude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `longitude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `longitude` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -110,7 +110,7 @@ INSERT INTO `koordinats` (`id`, `latitude`, `longitude`, `created_at`, `updated_
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -121,8 +121,8 @@ CREATE TABLE `migrations` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -134,11 +134,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -154,9 +154,11 @@ CREATE TABLE `siswa` (
   `id` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL,
   `nisn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nis` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_masuk` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_kelas` int NOT NULL,
-  `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,8 +167,9 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `id_kelas`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(8, 14, '2029229222', 6, '081934172542', 'padamu', '2023-03-21 15:58:35', '2023-03-21 16:05:11');
+INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `nis`, `tahun_masuk`, `id_kelas`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
+(1, 2, '12345678', '12345678', '2022', 1, '081234567890	', 'Jalan Merdeka No. 1', '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
+(2, 3, '23456789', '23456789', '2022', 1, '082345678901	', 'Jalan Merdeka No. 2', '2023-04-19 08:14:20', '2023-04-19 08:14:20');
 
 -- --------------------------------------------------------
 
@@ -181,17 +184,10 @@ CREATE TABLE `siswa_absensi` (
   `jam_masuk` time DEFAULT NULL,
   `jam_keluar` time DEFAULT NULL,
   `jam_kerja` time DEFAULT NULL,
-  `lokasi_absen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lokasi_absen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `siswa_absensi`
---
-
-INSERT INTO `siswa_absensi` (`id`, `id_siswa`, `tgl`, `jam_masuk`, `jam_keluar`, `jam_kerja`, `lokasi_absen`, `created_at`, `updated_at`) VALUES
-(2, 8, '2023-03-22', '07:19:43', '07:41:11', '00:21:28', NULL, '2023-03-21 17:19:43', '2023-03-21 17:41:11');
 
 -- --------------------------------------------------------
 
@@ -201,12 +197,12 @@ INSERT INTO `siswa_absensi` (`id`, `id_siswa`, `tgl`, `jam_masuk`, `jam_keluar`,
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -217,7 +213,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `level`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Administrator', 'admin', 'admin@gmail.com', NULL, 'admin123', NULL, '2023-03-20 21:24:31', '2023-03-20 21:24:31'),
-(14, 'Johannes Alexander Putra', 'siswa', 'johannes@upi.edu', NULL, '12345678', NULL, '2023-03-21 15:58:35', '2023-03-21 15:58:35');
+(2, 'John Doe', 'siswa', 'john.doe@example.com', NULL, '12345678', NULL, '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
+(3, 'Jane Doe', 'siswa', 'jane.doe@example.com', NULL, '12345678', NULL, '2023-04-19 08:14:20', '2023-04-19 08:14:20');
 
 --
 -- Indexes for dumped tables
@@ -337,7 +334,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `siswa_absensi`
@@ -349,7 +346,7 @@ ALTER TABLE `siswa_absensi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -365,7 +362,6 @@ ALTER TABLE `admins`
 -- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD CONSTRAINT `guru_p_n_s_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`);
 
 --
