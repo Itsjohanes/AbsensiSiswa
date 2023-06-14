@@ -21,21 +21,21 @@ class ImportSiswa implements ToCollection
         }
 
         $user = User::create([
-            'name' => $row[1],
+            'name' => $row[0],
             'level' => 'siswa',
-            'email' => $row[2],
-            'password' => $row[3]
+            'email' => $row[1],
+            'password' => $row[2]
         ]);
         
         $siswa = Siswa::create([
-            'id_user' => $row[0],
-            'nisn' => $row[4],
-            'nis' => $row[5],
-            'tahun_masuk' => $row[6],
-            'id_tahunajar' => $row[7],
-            'id_kelas' => $row[8],
-            'no_hp' => $row[9],
-            'alamat' => $row[10]
+            'id_user' => $user->id,
+            'nisn' => $row[3],
+            'nis' => $row[4],
+            'tahun_masuk' => $row[5],
+            'id_tahunajar' => $row[6],
+            'id_kelas' => $row[7],
+            'no_hp' => $row[8],
+            'alamat' => $row[9]
         ]);
     }
 }
