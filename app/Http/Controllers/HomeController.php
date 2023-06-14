@@ -23,7 +23,8 @@ class HomeController extends Controller
         $siswa_absen = SiswaAbsen::where('tgl', $tanggal)->count();
 
         $detail_siswa = SiswaAbsen::where('tgl', $tanggal)->get();
-        
+
+       
         //Agar tidak terjadi division by zero
         if ($siswa == 0) {
             $persen_siswa = 0;
