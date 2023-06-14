@@ -36,7 +36,8 @@ class SiswaController extends Controller
     {
         //berikan value untuk kelas dan kirimkan ke view
         $kelas = DB::table('kelas')->get();
-        return view('pages.siswa.create', compact('kelas'));
+        $tahunajar = DB::table('tahunajar')->get();
+        return view('pages.siswa.create', compact('kelas','tahunajar'));
     }
 
     public function import(Request $request)
@@ -62,6 +63,7 @@ class SiswaController extends Controller
             'nis'                    => 'required|numeric|unique:siswa',
             'tahun_masuk'            => 'required|numeric',
             'id_kelas'                  => 'required',
+            'id_tahunajar'          => 'required',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -84,6 +86,7 @@ class SiswaController extends Controller
             'tahun_masuk.required'                => 'Tahun Masuk wajib diisi',
             'tahun_masuk.numeric'                 => 'Tahun Masuk harus berupa angka',
             'id_kelas.required'                 => 'Kelas wajib dipilih',
+            'id_tahunajar.required'                 => 'Tahun Ajar wajib dipilih',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -132,10 +135,10 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $kelas = DB::table('kelas')->get();
-
+        $tahunajar = DB::table('tahunajar')->get();
         $siswa = Siswa::find($id);
 
-        return view('pages.siswa.edit', compact('siswa', 'kelas'));
+        return view('pages.siswa.edit', compact('siswa', 'kelas','tahunajar'));
     }
 
     /**
@@ -155,6 +158,7 @@ class SiswaController extends Controller
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
             'id_kelas'                  => 'required',
+            'id_tahunajar'          => 'required',
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
             'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
             'nis'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
@@ -173,6 +177,7 @@ class SiswaController extends Controller
             'konfirmasi_password.min'       => 'Konfirmasi password minimal 8 karakter',
             'email.required'                => 'Email wajib diisi',
             'id_kelas.required'                 => 'Kelas wajib dipilih',
+             'id_tahunajar.required'                 => 'Tahun Ajar wajib dipilih',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
             'nisn.required'                  => 'NIP wajib diisi',

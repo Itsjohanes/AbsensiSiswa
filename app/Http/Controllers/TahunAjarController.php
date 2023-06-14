@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
-use App\Models\Kelas;
+use App\Models\TahunAjar;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -12,7 +12,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 use Illuminate\Validation\Rule;
 
-class KelasController extends Controller
+class TahunAjarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +21,9 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::all();
+        $tahunajar = TahunAjar::all();
 
-        return view('pages.kelas.index', compact('kelas'));
+        return view('pages.tahunajar.index', compact('tahunajar'));
     }
 
     /**
@@ -33,7 +33,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('pages.kelas.create');
+        return view('pages.tahunajar.create');
     }
 
     /**
@@ -46,15 +46,15 @@ class KelasController extends Controller
     {
         //Method untuk Store sudah ditambahkan
         $rules = [
-            'kelas' => 'required||unique:kelas',
+            'tahunajar' => 'required||unique:tahunajar',
 
 
         ];
 
 
         $messages = [
-            'kelas.required' => 'Kelas wajib diisi',
-            'kelas.unique' => 'Kelas sudah ada',
+            'tahunajar.required' => 'Tahun Ajar wajib diisi',
+            'tahunajar.unique' => 'Tahun Ajar sudah ada',
 
 
         ];
@@ -65,13 +65,13 @@ class KelasController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $kelas = Kelas::create([
-            'kelas' => $request->kelas,
+        $tahunajar = TahunAjar::create([
+            'tahunajar' => $request->tahunajar,
         ]);
 
-        Alert::success('Berhasil', 'Kelas Berhasil Ditambahkan');
+        Alert::success('Berhasil', 'Tahun Ajar Berhasil Ditambahkan');
 
-        return redirect('/kelas');
+        return redirect('/tahunajar');
     }
 
     /**
@@ -93,9 +93,9 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        $kelas = Kelas::find($id);
+        $tahunajar = TahunAjar::find($id);
 
-        return view('pages.kelas.edit', compact('kelas'));
+        return view('pages.tahunajar.edit', compact('tahunajar'));
     }
 
     /**
@@ -107,18 +107,18 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kelas = Kelas::find($id);
+        $tahunajar = TahunAjar::find($id);
 
         $rules = [
-            'kelas' => 'required', Rule::unique('kelas')->ignore($id)
+            'tahunajar' => 'required', Rule::unique('tahunajar')->ignore($id)
 
 
         ];
 
 
         $messages = [
-            'kelas.required' => 'Kelas wajib diisi',
-            'kelas.unique' => 'Kelas sudah ada',
+            'tahunajar.required' => 'Tahun Ajar wajib diisi',
+            'tahunajar.unique' => 'Tahun Ajar sudah ada',
 
 
         ];
@@ -133,11 +133,11 @@ class KelasController extends Controller
         //ganti data kelas berdasarkan id
 
 
-        $kelas = Kelas::find($kelas->id);
-        $kelas->kelas = $request->kelas;
-        $kelas->save();
-        Alert::success('Berhasil', 'Kelas berhasil diubah');
-        return redirect('/kelas');
+        $tahunajar = TahunAjar::find($tahunajar->id);
+        $tahunajar->tahunajar = $request->tahunajar;
+        $tahunajar->save();
+        Alert::success('Berhasil', 'Tahun Ajar berhasil diubah');
+        return redirect('/tahunajar');
     }
 
     /**
@@ -149,15 +149,15 @@ class KelasController extends Controller
     public function destroy($id)
     {
 
-        $kelas = Kelas::find($id);
+        $tahunajar = TahunAjar::find($id);
         //hapus jika tidak ada foreignkey di table siswa
-        if ($kelas->siswa->count() == 0) {
-            $kelas->delete();
+        if ($tahunajar->siswa->count() == 0) {
+            $tahunajar->delete();
             Alert::success('Berhasil', 'Kelas berhasil dihapus');
-            return redirect('/kelas');
+            return redirect('/tahunajar');
         } else {
             Alert::error('Gagal', 'Kelas tidak bisa dihapus karena masih ada siswa');
-            return redirect('/kelas');
+            return redirect('/tahunajar');
         }
     }
 }

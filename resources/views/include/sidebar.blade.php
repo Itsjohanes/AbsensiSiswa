@@ -30,9 +30,16 @@
 
 				<li class="nav-item {{ Request::is('kelas') ? 'active' : '' }}">
 					<a href="/kelas">
-						<i class="fas fa-home text-primary]"></i>
+						<i class="fas fa-home text-danger]"></i>
 						<p>Kelas</p>
 						<span class="badge badge-count badge-danger">{{ \App\Models\Kelas::count() }}</span>
+					</a>
+				</li>
+				<li class="nav-item {{ Request::is('tahunajar') ? 'active' : '' }}">
+					<a href="/tahunajar">
+						<i class="fas fa-calendar-check text-primary]"></i>
+						<p>Tahun Ajar</p>
+						<span class="badge badge-count badge-danger">{{ \App\Models\TahunAjar::count() }}</span>
 					</a>
 				</li>
 

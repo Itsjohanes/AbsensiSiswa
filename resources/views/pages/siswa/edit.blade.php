@@ -36,11 +36,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
+                                    <input type="password" class="form-control" id="password" name="password" value="{{ $siswa->user->password }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="konfirmasi_password">Konfirmasi Password</label>
-                                    <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password" placeholder="Masukkan Konfirmasi Password">
+                                    <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password" value="{{ $siswa->user->password }}"  >
                                     <small id="emailHelp2" class="form-text text-muted">Untuk menyetujui perubahan, harap masukkan ulang password</small>
                                 </div>
                                 <hr>
@@ -60,6 +60,15 @@
                                 <div class="form-group">
                                     <label for="name">Tahun Masuk</label>
                                     <input type="text" class="form-control" id="tahun_masuk" name="tahun_masuk" value="{{ $siswa->tahun_masuk }}">
+                                </div>
+                                 <div class="form-group">
+                                    <label for="name">Tahun Ajar</label>
+                                    <select name="id_tahunajar" id="id_tahunajar" class="form-control">
+                                        <option value="">Pilih Tahun Ajar</option>
+                                        @foreach ($tahunajar as $item)
+                                        <option value="{{ $item->id }}" {{ $siswa->tahunajar->tahunajar == $item->tahunajar ? 'selected' : '' }}>{{ $item->tahunajar }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Kelas</label>

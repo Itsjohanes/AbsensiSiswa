@@ -40,18 +40,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('admin', AdminController::class);
     Route::resource('kelas', KelasController::class);
-
+    Route::resource('tahunajar', 'App\Http\Controllers\TahunAjarController');
     Route::resource('siswa', SiswaController::class);
-
     Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
-    Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}', [LaporanAbsenController::class, 'filter']);
-    Route::get('/cetak/{data1}/{data2}/{data3}', [LaporanAbsenController::class, 'cetak']);
-    //tambahkan kelas
-
+    Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
+    Route::get('/cetak/{data1}/{data2}/{data3}/{data4}', [LaporanAbsenController::class, 'cetak']);
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);
     Route::post('ubah-koordinat', [KoordinatSekolahController::class, 'update']);
-
-    //Import siswa
     Route::post('/import_excel/import', [SiswaController::class, 'import']);
 });
 

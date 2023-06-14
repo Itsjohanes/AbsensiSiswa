@@ -40,6 +40,13 @@
         Kelas {{ $kelas->kelas }}
         @endif
     </h5>
+    <h5 class="text-center">
+        @if ($id_tahunajar == 0)
+        Semua Tahun Ajar
+        @else
+        Tahun Ajar {{ $tahunajar->tahunajar }}
+        @endif
+    </h5>
     <p class="text-center"><span>Per </span>{{\Carbon\Carbon::parse($tglawal)->locale('id')->isoFormat('LL')}} - {{\Carbon\Carbon::parse($tglakhir)->locale('id')->isoFormat('LL')}}</p>
     <br>
     <div class="row">

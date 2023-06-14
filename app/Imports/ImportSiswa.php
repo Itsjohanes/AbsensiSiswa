@@ -13,7 +13,7 @@ class ImportSiswa implements ToCollection
     /**
      * @param Collection $collection
      */
-   public function collection(Collection $collection)
+    public function collection(Collection $collection)
 {
     foreach ($collection as $index => $row) {
         if ($index == 0) {
@@ -28,13 +28,14 @@ class ImportSiswa implements ToCollection
         ]);
         
         $siswa = Siswa::create([
-            'id_user' => $user->id,
+            'id_user' => $row[0],
             'nisn' => $row[4],
             'nis' => $row[5],
             'tahun_masuk' => $row[6],
-            'id_kelas' => $row[7],
-            'no_hp' => $row[8],
-            'alamat' => $row[9]
+            'id_tahunajar' => $row[7],
+            'id_kelas' => $row[8],
+            'no_hp' => $row[9],
+            'alamat' => $row[10]
         ]);
     }
 }

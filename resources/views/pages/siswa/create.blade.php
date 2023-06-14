@@ -60,6 +60,15 @@
                                     <input type="text" class="form-control" id="tahun_masuk" name="tahun_masuk" placeholder="Masukkan Tahun Masuk">
                                 </div>
                                 <div class="form-group">
+                                    <label for="name">Tahun Ajar</label>
+                                    <select name="id_tahunajar" id="id_tahunajar" class="form-control">
+                                        <option value="">Pilih Tahun Ajar</option>
+                                        @foreach ($tahunajar as $item)
+                                        <option value="{{ $item->id }}">{{ $item->tahunajar }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="name">Kelas</label>
                                     <select name="id_kelas" id="id_kelas" class="form-control">
                                         <option value="">Pilih Kelas</option>

@@ -71,6 +71,19 @@ class SiswaAbsenController extends Controller
 
         $siswa_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
+
+
+        //mendapatkan id_kelas dari table siswa berdasarkan id_siswa
+        $id_kelass = DB::table('siswa')
+            ->select('siswa.id_kelas')
+            ->where('siswa.id', '=', $siswa->id)
+            ->first();
+         $id_tahunajarr = DB::table('siswa')
+            ->select('siswa.id_tahunajar')
+            ->where('siswa.id', '=', $siswa->id)
+            ->first();
+    
+
         if ($siswa_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
             return redirect()->back();
@@ -83,7 +96,9 @@ class SiswaAbsenController extends Controller
                 SiswaAbsen::create([
                     'id_siswa' => $siswa->id,
                     'tgl'         => $tanggal,
-                    'jam_masuk'    => $localtime
+                    'jam_masuk'    => $localtime,
+                    'id_tahunajar' => $id_tahunajarr->id_tahunajar,
+                    'id_kelas'     => $id_kelass->id_kelas
                 ]);
 
                 Alert::success('Berhasil', 'Berhasil melakukan absen masuk');

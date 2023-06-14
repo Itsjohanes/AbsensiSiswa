@@ -93,7 +93,7 @@
                                         <th scope="col">Nama</th>
                                         <th scope="col">Jam Masuk</th>
                                         <th scope="col">Jam Keluar</th>
-                                        <th scope="col">Total Jam Kerja</th>
+                                        <th scope="col">Total Belajar</th>
                                         <th scope="col">Keterangan Masuk</th>
                                     </tr>
                                 </thead>
