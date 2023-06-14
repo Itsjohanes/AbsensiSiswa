@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2023 at 03:20 PM
+-- Generation Time: Jun 14, 2023 at 04:44 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sisuharsih`
+-- Database: `db_absensiswa`
 --
 
 -- --------------------------------------------------------
@@ -154,8 +154,8 @@ CREATE TABLE `siswa` (
   `id` bigint UNSIGNED NOT NULL,
   `id_user` bigint UNSIGNED NOT NULL,
   `nisn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nis` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun_masuk` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun_masuk` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_kelas` int NOT NULL,
   `no_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -169,7 +169,9 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `nis`, `tahun_masuk`, `id_kelas`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
 (1, 2, '12345678', '12345678', '2022', 1, '081234567890	', 'Jalan Merdeka No. 1', '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
-(2, 3, '23456789', '23456789', '2022', 1, '082345678901	', 'Jalan Merdeka No. 2', '2023-04-19 08:14:20', '2023-04-19 08:14:20');
+(2, 3, '23456789', '23456789', '2022', 1, '082345678901	', 'Jalan Merdeka No. 2', '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
+(3, 4, '224567802', '2245678', '2022', 1, '081234567890	', 'Jalan Merdeka No. 2', '2023-06-13 21:39:43', '2023-06-13 21:39:43'),
+(4, 5, '224567803', '2245679', '2022', 1, '081234567891	', 'Jalan Merdeka No. 3', '2023-06-13 21:39:43', '2023-06-13 21:39:43');
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `level`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Administrator', 'admin', 'admin@gmail.com', NULL, 'admin123', NULL, '2023-03-20 21:24:31', '2023-03-20 21:24:31'),
 (2, 'John Doe', 'siswa', 'john.doe@example.com', NULL, '12345678', NULL, '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
-(3, 'Jane Doe', 'siswa', 'jane.doe@example.com', NULL, '12345678', NULL, '2023-04-19 08:14:20', '2023-04-19 08:14:20');
+(3, 'Jane Doe', 'siswa', 'jane.doe@example.com', NULL, '12345678', NULL, '2023-04-19 08:14:20', '2023-04-19 08:14:20'),
+(4, 'John Doe5', 'siswa', 'john.doe235@example.com', NULL, 'inipassword', NULL, '2023-06-13 21:39:43', '2023-06-13 21:39:43'),
+(5, 'John Doe6', 'siswa', 'john.doe236@example.com', NULL, 'inipassword', NULL, '2023-06-13 21:39:43', '2023-06-13 21:39:43');
 
 --
 -- Indexes for dumped tables
@@ -281,7 +285,7 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `siswa_absensi`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `guru_pns_absens_id_guru_pns_foreign` (`id_siswa`);
+  ADD KEY `siswa_absens_id_siswa_foreign` (`id_siswa`);
 
 --
 -- Indexes for table `users`
@@ -334,7 +338,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `siswa_absensi`
@@ -346,7 +350,7 @@ ALTER TABLE `siswa_absensi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -368,7 +372,7 @@ ALTER TABLE `siswa`
 -- Constraints for table `siswa_absensi`
 --
 ALTER TABLE `siswa_absensi`
-  ADD CONSTRAINT `guru_pns_absens_id_guru_pns_foreign` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `siswa_absens_id_siswa_foreign` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
