@@ -30,7 +30,7 @@
 
 				<li class="nav-item {{ Request::is('kelas') ? 'active' : '' }}">
 					<a href="/kelas">
-						<i class="fas fa-home text-danger]"></i>
+						<i class="fas fa-home  text-warning]"></i>
 						<p>Kelas</p>
 						<span class="badge badge-count badge-danger">{{ \App\Models\Kelas::count() }}</span>
 					</a>
@@ -74,7 +74,7 @@
 				</li>
 				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
 					<a href="/edit-profile">
-						<i class="fas fa-users text-success"></i>
+						<i class="fas fa-users text-warning"></i>
 						<p>Edit Profile</p>
 					</a>
 				</li>

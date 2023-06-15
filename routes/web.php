@@ -8,7 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaAbsenController;
-
+use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\TahunAjarController;
 use App\Http\Controllers\LaporanAbsenController;
 use App\Http\Controllers\KoordinatSekolahController;
 use App\Http\Controllers\KelasController;
@@ -40,7 +41,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('admin', AdminController::class);
     Route::resource('kelas', KelasController::class);
-    Route::resource('tahunajar', 'App\Http\Controllers\TahunAjarController');
+    Route::resource('tahunajar', TahunAjarController::class);
     Route::resource('siswa', SiswaController::class);
     Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
     Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 
     Route::resource('absen-siswa', SiswaAbsenController::class);
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
-    Route::resource('edit-profile', 'App\Http\Controllers\EditProfileController');
+    Route::resource('edit-profile', EditProfileController::class);
 });
 
 

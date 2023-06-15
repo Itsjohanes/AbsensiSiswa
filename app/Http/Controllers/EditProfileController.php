@@ -25,7 +25,7 @@ class EditProfileController extends Controller
         $kelas = DB::table('kelas')->get();
         $tahunajar = DB::table('tahunajar')->get();
         $id = Auth::id();
-        $siswa = Siswa::find($id);
+        $siswa = Siswa::where('id_user', $id)->first();
 
         return view('pages.siswa.editprofile', compact('siswa', 'kelas','tahunajar'));
     }
@@ -41,9 +41,9 @@ class EditProfileController extends Controller
     {
 
         //id ambil dari session 
-       $id = Auth::id();
+        $id = Auth::id();
 
-        $siswa = Siswa::find($id);
+        $siswa = Siswa::where('id_user', $id)->first();
 
         $rules = [
             'name'                  => 'required',
