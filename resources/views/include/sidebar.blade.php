@@ -72,6 +72,14 @@
 						<p>Lokasi Anda</p>
 					</a>
 				</li>
+				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
+					<a href="/edit-profile">
+						<i class="fas fa-users text-success"></i>
+						<p>Edit Profile</p>
+					</a>
+				</li>
+
+
 				@endif
 
 

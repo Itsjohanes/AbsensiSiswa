@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 
     Route::resource('absen-siswa', SiswaAbsenController::class);
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
+    Route::resource('edit-profile', 'App\Http\Controllers\EditProfileController');
 });
 
 
