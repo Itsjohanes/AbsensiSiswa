@@ -151,7 +151,7 @@ class KelasController extends Controller
 
         $kelas = Kelas::find($id);
         //hapus jika tidak ada foreignkey di table siswa
-        if ($kelas->siswa->count() == 0) {
+        if ($kelas->siswa->count() == 0 && $kelas->absen->count() == 0) {
             $kelas->delete();
             Alert::success('Berhasil', 'Kelas berhasil dihapus');
             return redirect('/kelas');
@@ -159,5 +159,6 @@ class KelasController extends Controller
             Alert::error('Gagal', 'Kelas tidak bisa dihapus karena masih ada siswa');
             return redirect('/kelas');
         }
+      
     }
 }

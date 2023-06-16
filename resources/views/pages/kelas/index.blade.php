@@ -20,7 +20,8 @@
                                 <table id="basic-datatables" class="display table table-striped table-hover" cellspacing="0" width="100%">
                                     <thead>
                                         <th class="text-center">No</th>
-                                        <th>Kelas</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Kelas</th>
                                         <th class="text-center">Action</th>
 
                                     </thead>
@@ -28,7 +29,8 @@
                                         @forelse($kelas as $data)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $data->kelas }}</td>
+                                            <td class="text-center">{{ $data->id }}</td>
+                                            <td class="text-center">{{ $data->kelas }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('kelas.edit', $data->id) }}" class="btn btn-warning d-inline"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('kelas.destroy', $data->id) }}" method="POST" class="d-inline" onclick="return confirm('Apa yakin ingin menghapus data ini? Data yang terkait juga akan ikut terhapus')" .>

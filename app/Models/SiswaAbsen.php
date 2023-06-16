@@ -17,4 +17,12 @@ class SiswaAbsen extends Model
     {
         return $this->belongsTo(Siswa::class, 'id_siswa');
     }
+     function tahunajar()
+    {
+        return $this->belongsTo(TahunAjar::class, 'id_tahunajar');
+    }
+    function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
+    }
 }

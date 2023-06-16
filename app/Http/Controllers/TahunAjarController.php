@@ -151,13 +151,14 @@ class TahunAjarController extends Controller
 
         $tahunajar = TahunAjar::find($id);
         //hapus jika tidak ada foreignkey di table siswa
-        if ($tahunajar->siswa->count() == 0) {
+        if ($tahunajar->siswa->count() == 0 && $tahunajar->absen->count() == 0) {
             $tahunajar->delete();
-            Alert::success('Berhasil', 'Kelas berhasil dihapus');
+            Alert::success('Berhasil', 'Tahun Ajar berhasil dihapus');
             return redirect('/tahunajar');
         } else {
-            Alert::error('Gagal', 'Kelas tidak bisa dihapus karena masih ada siswa');
+            Alert::error('Gagal', 'Tahun Ajar tidak bisa dihapus karena masih ada siswa');
             return redirect('/tahunajar');
         }
+        
     }
 }

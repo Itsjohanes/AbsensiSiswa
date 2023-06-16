@@ -19,4 +19,10 @@ class Kelas extends Model
     {
         return $this->hasMany(Siswa::class, 'id_kelas');
     }
+    public function absen()
+    {
+        return $this->hasMany(SiswaAbsen::class, 'id_tahunajar');
+    }
+
+    
 }

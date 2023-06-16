@@ -19,4 +19,9 @@ class TahunAjar extends Model
     {
         return $this->hasMany(Siswa::class, 'id_tahunajar');
     }
+
+    public function absen()
+    {
+        return $this->hasMany(SiswaAbsen::class, 'id_tahunajar');
+    }
 }
