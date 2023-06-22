@@ -83,7 +83,7 @@
 				</li>
 				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
 					<a href="/edit-profile">
-						<i class="fas fa-users text-warning"></i>
+						<i class="fas fa-user text-warning"></i>
 						<p>Edit Profile</p>
 					</a>
 				</li>
