@@ -38,10 +38,10 @@
                             <div class="card-body text-center">
                                 <div class="card-opening">Foto</div>
                                 <div class="card-desc"  style="overflow: hidden;">
-                                    <div id="my_camera" style="max-width: 100%;"></div>
+                                    <div id="my_camera" class="mx-auto" style="max-width: 100%;"></div>
                                 </div>
                                 <div class="card-desc" style="overflow: hidden;">
-                                    <div id="results" style="max-width: 100%;">Your captured image will appear here...</div>
+                                    <div id="results" class="mx-auto" style="max-width: 100%;">Your captured image will appear here...</div>
                                 </div>
                                 <div class="card-detail">
                                     <input type="button" value="Take Snapshot" onClick="take_snapshot()"></button>
