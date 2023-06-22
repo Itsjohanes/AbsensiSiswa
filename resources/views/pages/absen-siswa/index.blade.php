@@ -44,7 +44,7 @@
                                     <div id="results" class="mx-auto" style="max-width: 100%;">Your captured image will appear here...</div>
                                 </div>
                                 <div class="card-detail">
-                                    <input type="button" value="Take Snapshot" onClick="take_snapshot()"></button>
+                                    <input type="button" class="btn btn-light btn-rounded" value="Take Snapshot" onClick="take_snapshot()"></button>
                                 </div>
                             </div>
                         </div>
