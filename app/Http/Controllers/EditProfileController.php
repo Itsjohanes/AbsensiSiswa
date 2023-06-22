@@ -27,7 +27,30 @@ class EditProfileController extends Controller
         $id = Auth::id();
         $siswa = Siswa::where('id_user', $id)->first();
 
-        return view('pages.siswa.editprofile', compact('siswa', 'kelas','tahunajar'));
+        if ($siswa) {
+            $idSiswa = $siswa->id;
+
+            // Mengambil riwayat kelas
+            $riwayatKelas = DB::table('kelassiswa')
+                ->join('kelas', 'kelassiswa.id_kelas', '=', 'kelas.id')
+                ->where('kelassiswa.id_siswa', $idSiswa)
+                ->pluck('kelas.kelas')
+                ->toArray();
+
+            $riwayatKelasString = implode(', ', $riwayatKelas);
+
+            // Mengambil riwayat tahun ajaran
+            $riwayatTahunAjaran = DB::table('kelassiswa')
+                ->join('tahunajar', 'kelassiswa.id_tahunajar', '=', 'tahunajar.id')
+                ->where('kelassiswa.id_siswa', $idSiswa)
+                ->pluck('tahunajar.tahunajar')
+                ->toArray();
+
+            $riwayatTahunAjaranString = implode(', ', $riwayatTahunAjaran);
+        }
+
+
+        return view('pages.siswa.editprofile', compact('siswa','riwayatKelasString', 'riwayatTahunAjaranString'));
     }
 
     /**
@@ -49,8 +72,7 @@ class EditProfileController extends Controller
             'name'                  => 'required',
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
-            'id_kelas'                  => 'required',
-            'id_tahunajar'          => 'required',
+          
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
             'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
             'nis'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
@@ -68,8 +90,6 @@ class EditProfileController extends Controller
             'konfirmasi_password.required'  => 'Konfirmasi password wajib diisi',
             'konfirmasi_password.min'       => 'Konfirmasi password minimal 8 karakter',
             'email.required'                => 'Email wajib diisi',
-            'id_kelas.required'                 => 'Kelas wajib dipilih',
-             'id_tahunajar.required'                 => 'Tahun Ajar wajib dipilih',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
             'nisn.required'                  => 'NIP wajib diisi',
@@ -95,7 +115,6 @@ class EditProfileController extends Controller
         $siswa->nisn = $request->nisn;
         $siswa->nis = $request->nis;
         $siswa->tahun_masuk = $request->tahun_masuk;
-        $siswa->id_kelas = $request->id_kelas;
         $siswa->no_hp = $request->no_hp;
         $siswa->alamat = $request->alamat;
         $siswa->save();

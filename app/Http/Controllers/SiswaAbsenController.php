@@ -71,23 +71,34 @@ class SiswaAbsenController extends Controller
 
         $siswa_absen = SiswaAbsen::where('id_siswa', '=', $siswa->id)->where('tgl', '=', $tanggal)->first();
 
+        //mendapatkan id_kelas terbaru dari table kelassiswa berdasarkan id_siswa
+        $id_siswa = $siswa->id;
+        $id_kelass = DB::table('kelassiswa')
+                    ->where('id_siswa', $id_siswa)
+                    ->latest('created_at')
+                    ->pluck('id_kelas')
+                    ->first();
+        //mendapatkan id_tahunajar terbaru dari table kelassiswa berdasarkan id_siswa
 
+        $id_tahunajarr = DB::table('kelassiswa')
+                    ->where('id_siswa', $id_siswa)
+                    ->latest('created_at')
+                    ->pluck('id_tahunajar')
+                    ->first();
 
-        //mendapatkan id_kelas dari table siswa berdasarkan id_siswa
-        $id_kelass = DB::table('siswa')
-            ->select('siswa.id_kelas')
-            ->where('siswa.id', '=', $siswa->id)
-            ->first();
-         $id_tahunajarr = DB::table('siswa')
-            ->select('siswa.id_tahunajar')
-            ->where('siswa.id', '=', $siswa->id)
-            ->first();
-    
+        //Melakukan pengecekan $id_tahunajarr apakah dia $id_tahunajar terbaru atau tidak dengan cara mengambil baris terakhir id tahun ajar dari table tahunajar
+        $id_tahunajarr_terbaru = DB::table('tahunajar')
+                    ->latest('created_at')
+                    ->pluck('id')
+                    ->first();
+        if($id_tahunajarr == $id_tahunajarr_terbaru)  {          
+                  
 
         if ($siswa_absen) {
             Alert::warning('Peringatan', 'Sudah melakukan absensi masuk');
             return redirect()->back();
         } else {
+            //Jika jarak lebih besar dari 0.2
             if ($jarak > 0.2) {
                 Alert::error('Gagal', 'Jarak anda jauh dari sekolah!');
                 return redirect()->back();
@@ -97,13 +108,17 @@ class SiswaAbsenController extends Controller
                     'id_siswa' => $siswa->id,
                     'tgl'         => $tanggal,
                     'jam_masuk'    => $localtime,
-                    'id_tahunajar' => $id_tahunajarr->id_tahunajar,
-                    'id_kelas'     => $id_kelass->id_kelas
+                    'id_tahunajar' => $id_tahunajarr,
+                    'id_kelas'     => $id_kelass
                 ]);
 
                 Alert::success('Berhasil', 'Berhasil melakukan absen masuk');
                 return redirect('/absen-siswa');
             }
+        }
+        }else{
+                Alert::warning('Peringatan', 'Anda Belum terdaftar di tahun ajar terbaru');
+                return redirect()->back();
         }
     }
 
@@ -170,7 +185,8 @@ class SiswaAbsenController extends Controller
 
         if ($siswa_absen) {
             if ($siswa_absen->jam_keluar == "") {
-                if ($jarak < 0.2) {
+                //Jika jarak lebih kecil atau sama dengan 0.2 bisa melakukan absen keluar
+                if ($jarak <= 0.2) {
                     $siswa_absen->update([
                         'jam_keluar' => $localtime,
                         'jam_kerja' => date('H:i:s', strtotime($localtime) - strtotime($siswa_absen->jam_masuk))

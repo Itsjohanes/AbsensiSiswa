@@ -12,6 +12,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 use Illuminate\Validation\Rule;
 
+/*
+    Johannes Alexander Putra
+    johannesap@upi.edu
+
+
+*/
+
 class TahunAjarController extends Controller
 {
     /**
@@ -151,7 +158,7 @@ class TahunAjarController extends Controller
 
         $tahunajar = TahunAjar::find($id);
         //hapus jika tidak ada foreignkey di table siswa
-        if ($tahunajar->siswa->count() == 0 && $tahunajar->absen->count() == 0) {
+        if ($tahunajar->absen->count() == 0 && $tahunajar->transaksi->count() == 0) {
             $tahunajar->delete();
             Alert::success('Berhasil', 'Tahun Ajar berhasil dihapus');
             return redirect('/tahunajar');

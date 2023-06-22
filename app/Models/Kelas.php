@@ -12,9 +12,6 @@ class Kelas extends Model
     protected $table = 'kelas';
 
     protected $fillable = ['kelas'];
-
-
-
     public function siswa()
     {
         return $this->hasMany(Siswa::class, 'id_kelas');
@@ -22,6 +19,11 @@ class Kelas extends Model
     public function absen()
     {
         return $this->hasMany(SiswaAbsen::class, 'id_tahunajar');
+    }
+    public function transaksi(){
+
+        return $this->hasMany(Transaksi::class, 'id_kelas');
+
     }
 
     

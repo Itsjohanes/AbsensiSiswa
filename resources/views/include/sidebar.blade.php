@@ -22,11 +22,20 @@
 
 				<li class="nav-item {{ Request::is('siswa') ? 'active' : '' }}">
 					<a href="/siswa">
-						<i class="fas fa-chalkboard-teacher text-danger"></i>
-						<p>Siswa</p>
+						<i class="fas fa-user-graduate text-danger"></i>
+						<p>Data Akun Siswa</p>
 						<span class="badge badge-count badge-danger">{{ \App\Models\Siswa::count() }}</span>
 					</a>
 				</li>
+
+				<li class="nav-item {{ Request::is('transaksi') ? 'active' : '' }}">
+					<a href="/transaksi">
+						<i class="fas fa-chalkboard-teacher text-success"></i>
+						<p>Transaksi Kelas</p>
+					</a>
+				</li>
+
+				
 
 				<li class="nav-item {{ Request::is('kelas') ? 'active' : '' }}">
 					<a href="/kelas">

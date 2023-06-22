@@ -36,11 +36,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
+                                    <input type="password" class="form-control" id="password" name="password" value="{{ $admin->user->password }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="konfirmasi_password">Konfirmasi Password</label>
-                                    <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password" placeholder="Masukkan Konfirmasi Password">
+                                    <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password" value="{{ $admin->user->password }}">
                                     <small id="emailHelp2" class="form-text text-muted">Untuk menyetujui perubahan, harap masukkan ulang password</small>
                                 </div>
                                 <hr>

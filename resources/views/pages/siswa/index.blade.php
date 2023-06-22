@@ -31,8 +31,6 @@
                                         <th class="text-center">NISN</th>
                                         <th class="text-center">NIS</th>
                                         <th class="text-center">Tahun Masuk</th>
-                                        <th class="text-center">Tahun Ajar</th>
-                                        <th class="text-center">Kelas</th>
                                         <th>Alamat</th>
                                         <th>Nomor Handphone</th>
                                         <th class="text-center">Action</th>
@@ -45,8 +43,7 @@
                                             <td class="text-center">{{ $data->nisn }}</td>
                                             <td class="text-center">{{ $data->nis }}</td>
                                             <td class="text-center">{{ $data->tahun_masuk }}</td>
-                                            <td class="text-center">{{ $data->tahunajar->tahunajar }}</td>
-                                            <td class="text-center">{{ $data->kelas->kelas }}</td>
+                                           
                                             <td>{{ $data->alamat }}</td>
                                             <td>{{ $data->no_hp }}</td>
                                             <td class="text-center">
@@ -60,7 +57,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">Data Kosong. Klik "Tambahkan Siswa" untuk tambah data</td>
+                                            <td colspan="9" class="text-center">Data Kosong. Klik "Tambahkan Siswa" untuk tambah data</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

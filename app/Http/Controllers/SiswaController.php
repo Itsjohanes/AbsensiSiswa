@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\Transaksi;
 use App\Imports\ImportSiswa;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
@@ -23,7 +24,6 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::with('user')->get();
-
         return view('pages.siswa.index', compact('siswa'));
     }
 
@@ -62,8 +62,6 @@ class SiswaController extends Controller
             'nisn'                   => 'required|numeric|unique:siswa',
             'nis'                    => 'required|numeric|unique:siswa',
             'tahun_masuk'            => 'required|numeric',
-            'id_kelas'                  => 'required',
-            'id_tahunajar'          => 'required',
             'no_hp'                 => 'required|numeric',
             'alamat'                => 'required'
         ];
@@ -85,8 +83,6 @@ class SiswaController extends Controller
             'nis.unique'                    => 'NIS sudah terdaftar',
             'tahun_masuk.required'                => 'Tahun Masuk wajib diisi',
             'tahun_masuk.numeric'                 => 'Tahun Masuk harus berupa angka',
-            'id_kelas.required'                 => 'Kelas wajib dipilih',
-            'id_tahunajar.required'                 => 'Tahun Ajar wajib dipilih',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -106,12 +102,20 @@ class SiswaController extends Controller
             'password' => $request->password,
         ]);
 
-        $input = $request->except(['name', 'email', 'password', 'konfirmasi_password']);
+        $input = $request->except(['name', 'email', 'password', 'konfirmasi_password','id_kelas','id_tahunajar']);
+        
 
         Siswa::create(array_merge($input, ['id_user' => $user->id]));
 
-        Alert::success('Berhasil', 'Siswa Berhasil Ditambahkan');
+        $input = $request->except(['name', 'email', 'password', 'konfirmasi_password','no_hp','alamat','nis','nisn','tahun_masuk']);
 
+        //mendapatkan id_siswa dari tabel siswa yang id_usernya
+        $siswa = Siswa::where('id_user', $user->id)->first();
+        if ($siswa) {
+            $id_siswa = $siswa->id;
+        } 
+        Transaksi::create(array_merge($input, ['id_siswa' => $id_siswa]));
+        Alert::success('Berhasil', 'Siswa Berhasil Ditambahkan');
         return redirect('/siswa');
     }
 
@@ -134,11 +138,31 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        $kelas = DB::table('kelas')->get();
-        $tahunajar = DB::table('tahunajar')->get();
         $siswa = Siswa::find($id);
 
-        return view('pages.siswa.edit', compact('siswa', 'kelas','tahunajar'));
+        if ($siswa) {
+            $idSiswa = $siswa->id;
+
+            // Mengambil riwayat kelas
+            $riwayatKelas = DB::table('kelassiswa')
+                ->join('kelas', 'kelassiswa.id_kelas', '=', 'kelas.id')
+                ->where('kelassiswa.id_siswa', $idSiswa)
+                ->pluck('kelas.kelas')
+                ->toArray();
+
+            $riwayatKelasString = implode(', ', $riwayatKelas);
+
+            // Mengambil riwayat tahun ajaran
+            $riwayatTahunAjaran = DB::table('kelassiswa')
+                ->join('tahunajar', 'kelassiswa.id_tahunajar', '=', 'tahunajar.id')
+                ->where('kelassiswa.id_siswa', $idSiswa)
+                ->pluck('tahunajar.tahunajar')
+                ->toArray();
+
+            $riwayatTahunAjaranString = implode(', ', $riwayatTahunAjaran);
+        }
+
+        return view('pages.siswa.edit', compact('siswa','riwayatKelasString','riwayatTahunAjaranString'));
     }
 
     /**
@@ -157,8 +181,6 @@ class SiswaController extends Controller
             'name'                  => 'required',
             'password'              => 'required|min:8|same:konfirmasi_password',
             'konfirmasi_password'   => 'required|min:8',
-            'id_kelas'                  => 'required',
-            'id_tahunajar'          => 'required',
             'email'                 => 'required|email|', Rule::unique('users')->ignore($id),
             'nisn'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
             'nis'                   => 'required|numeric|', Rule::unique('siswa')->ignore($id),
@@ -176,8 +198,6 @@ class SiswaController extends Controller
             'konfirmasi_password.required'  => 'Konfirmasi password wajib diisi',
             'konfirmasi_password.min'       => 'Konfirmasi password minimal 8 karakter',
             'email.required'                => 'Email wajib diisi',
-            'id_kelas.required'                 => 'Kelas wajib dipilih',
-             'id_tahunajar.required'                 => 'Tahun Ajar wajib dipilih',
             'email.email'                   => 'Email tidak valid',
             'email.unique'                  => 'Email sudah terdaftar',
             'nisn.required'                  => 'NIP wajib diisi',
@@ -186,8 +206,8 @@ class SiswaController extends Controller
             'nisn.unique'                    => 'NISN sudah terdaftar',
             'nis.required'                  => 'NIS wajib diisi',
             'nis.unique'                    => 'NIS sudah terdaftar',
-            'tahun_masuk.required'                => 'Tahun Masuk wajib diisi',
-            'tahun_masuk.numeric'                 => 'Tahun Masuk harus berupa angka',
+            'tahun_masuk.required'          => 'Tahun Masuk wajib diisi',
+            'tahun_masuk.numeric'          => 'Tahun Masuk harus berupa angka',
             'no_hp.required'                => 'Nomor handphone wajib diisi',
             'no_hp.numeric'                 => 'Nomor handphone harus berupa angka',
             'alamat.required'               => 'Alamat wajib diisi'
@@ -203,7 +223,6 @@ class SiswaController extends Controller
         $siswa->nisn = $request->nisn;
         $siswa->nis = $request->nis;
         $siswa->tahun_masuk = $request->tahun_masuk;
-        $siswa->id_kelas = $request->id_kelas;
         $siswa->no_hp = $request->no_hp;
         $siswa->alamat = $request->alamat;
         $siswa->save();
@@ -228,7 +247,7 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         $siswa = Siswa::find($id);
-        if ($siswa->siswa_absen()->count()) {
+        if ($siswa->siswa_absen()->count() && $siswa->transaksi()->count()) {
             Alert::error('Gagal', 'Siswa ini sudah memiliki riwayat absen');
             return redirect()->back();
         } else {

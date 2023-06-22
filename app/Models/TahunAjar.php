@@ -24,4 +24,9 @@ class TahunAjar extends Model
     {
         return $this->hasMany(SiswaAbsen::class, 'id_tahunajar');
     }
+    public function transaksi(){
+
+        return $this->hasMany(Transaksi::class, 'id_tahunajar');
+
+    }
 }

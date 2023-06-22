@@ -11,7 +11,7 @@ class Siswa extends Model
 
     protected $table = 'siswa';
 
-    protected $fillable = ['id_user', 'id_kelas', 'id_tahunajar', 'nisn', 'nis', 'tahun_masuk', 'no_hp', 'alamat'];
+    protected $fillable = ['id_user', 'nisn', 'nis', 'tahun_masuk', 'no_hp', 'alamat'];
 
     public function user()
     {
@@ -30,4 +30,10 @@ class Siswa extends Model
     {
         return $this->belongsTo(TahunAjar::class, 'id_tahunajar');
     }
+    public function transaksi(){
+
+        return $this->hasMany(Transaksi::class, 'id_siswa');
+
+    }
+    
 }

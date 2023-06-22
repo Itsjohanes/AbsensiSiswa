@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Transaksi;
 
 class ImportSiswa implements ToCollection
 {
@@ -17,7 +18,7 @@ class ImportSiswa implements ToCollection
 {
     foreach ($collection as $index => $row) {
         if ($index == 0) {
-            continue; // Skip the first row
+            continue; 
         }
 
         $user = User::create([
@@ -32,10 +33,13 @@ class ImportSiswa implements ToCollection
             'nisn' => $row[3],
             'nis' => $row[4],
             'tahun_masuk' => $row[5],
-            'id_tahunajar' => $row[6],
-            'id_kelas' => $row[7],
             'no_hp' => $row[8],
             'alamat' => $row[9]
+        ]);
+        $transaksi = Transaksi::create([
+            'id_siswa' => $siswa->id,
+            'id_tahunajar' => $row[6],
+            'id_kelas' => $row[7]
         ]);
     }
 }

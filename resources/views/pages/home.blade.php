@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Siswa</p>
+                                        <p class="card-category">Jumlah Siswa: Tahun Ajaran {{$tahunAjar}}</p>
                                         <h4 class="card-title">{{ $siswa }}</h4>
                                     </div>
                                 </div>
@@ -54,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                
 
             </div>
             <div class="row">

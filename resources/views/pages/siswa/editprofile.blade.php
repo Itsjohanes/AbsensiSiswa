@@ -61,24 +61,17 @@
                                     <label for="name">Tahun Masuk</label>
                                     <input type="text" class="form-control" id="tahun_masuk" name="tahun_masuk" value="{{ $siswa->tahun_masuk }}">
                                 </div>
-                                 <div class="form-group">
-                                    <label for="name">Tahun Ajar</label>
-                                    <select name="id_tahunajar" id="id_tahunajar" class="form-control">
-                                        <option value="">Pilih Tahun Ajar</option>
-                                        @foreach ($tahunajar as $item)
-                                        <option value="{{ $item->id }}" {{ $siswa->tahunajar->tahunajar == $item->tahunajar ? 'selected' : '' }}>{{ $item->tahunajar }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
                                 <div class="form-group">
-                                    <label for="name">Kelas</label>
-                                    <select name="id_kelas" id="id_kelas" class="form-control">
-                                        <option value="">Pilih Kelas</option>
-                                        @foreach ($kelas as $item)
-                                        <option value="{{ $item->id }}" {{ $siswa->kelas->kelas == $item->kelas ? 'selected' : '' }}>{{ $item->kelas }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="riwayattahunajar">Riwayat Tahun Ajar</label>
+                                    <input type="text" class="form-control" id="riwayattahunajar" name="riwayattahunajar" value="{{ $riwayatTahunAjaranString }}" disabled>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="riwayatkelas">Riwayat Kelas</label>
+                                    <input type="text" class="form-control" id="riwayatkelas" name="riwayatkelas" value="{{ $riwayatKelasString }}" disabled>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name">Nomor Handphone</label>
                                     <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $siswa->no_hp }}">
