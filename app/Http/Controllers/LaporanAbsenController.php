@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\SiswaAbsen;
 use App\Models\Kelas;
 use App\Models\TahunAjar;
+use Illuminate\Support\Facades\Storage;
+
+
 class LaporanAbsenController extends Controller
 {
     public function laporan()
@@ -39,6 +42,8 @@ class LaporanAbsenController extends Controller
             ->get();
         return view('pages.laporan.filter', compact('absen_siswa', 'data1', 'data2', 'data3', 'data4', 'kelas','tahunajar'));
     }
+
+    
 
 
 

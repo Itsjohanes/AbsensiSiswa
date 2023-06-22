@@ -31,38 +31,55 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center align-items-center">
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-6 pl-md-0">
+                        <div class="card card-warning card-annoucement card-round">
+                            <div class="card-body text-center">
+                                <div class="card-opening">Foto</div>
+                                <div class="card-desc"  style="overflow: hidden;">
+                                    <div id="my_camera" style="max-width: 100%;"></div>
+                                </div>
+                                <div class="card-desc" style="overflow: hidden;">
+                                    <div id="results" style="max-width: 100%;">Your captured image will appear here...</div>
+                                </div>
+                                <div class="card-detail">
+                                    <input type="button" value="Take Snapshot" onClick="take_snapshot()"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center align-items-center">
                 <div class="col-md-3 pl-md-0">
                     <div class="card card-success card-annoucement card-round">
                         <div class="card-body text-center">
                             <div class="card-opening">Absen Masuk</div>
-                            <div class="card-desc">
-
-                            </div>
                             <div class="card-detail">
-                                <form action="{{ route('absen-siswa.store') }}" method="POST">
+                                <form action="{{ route('absen-siswa.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" id="lat" name="lat">
                                     <input type="hidden" id="lng" name="lng">
+                                    <input type="hidden" name="image" class="image-tag">
                                     <button type="submit" class="btn btn-light btn-rounded" id="absenMasuk" disabled>Absen Masuk</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-3 pl-md-0">
                     <div class="card card-danger card-annoucement card-round">
                         <div class="card-body text-center">
                             <div class="card-opening">Absen Keluar</div>
-                            <div class="card-desc">
-
-                            </div>
+                            
                             <div class="card-detail">
-
-                                <form action="{{ route('absen-siswa-keluar') }}" method="POST">
+                                <form action="{{ route('absen-siswa-keluar') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" id="lat1" name="lat">
                                     <input type="hidden" id="lng1" name="lng">
+                                    <input type="hidden" name="image" class="image-tag">
                                     <button type="submit" class="btn btn-light btn-rounded" id="absenKeluar" disabled>Absen Keluar</button>
                                 </form>
                             </div>
@@ -70,11 +87,11 @@
                     </div>
                 </div>
             </div>
+
+            </div>
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 pl-md-0">
                     <div class="card card-annoucement card-round">
-
-
                     </div>
                 </div>
             </div>
@@ -116,6 +133,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -127,6 +145,8 @@
 @push('addon-script')
 <!-- Datatables -->
 <script src="{{ asset('/assets/js/plugin/datatables/datatables.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#basic-datatables').DataTable();
@@ -159,6 +179,25 @@
         document.getElementById('lng1').value = lng;
         document.getElementById('latTest').value = lat;
         document.getElementById('lngTest').value = lng;
+    }
+
+   
+</script>
+<script language="JavaScript">
+    Webcam.set({
+        width: 490,
+        height: 350,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    
+    Webcam.attach( '#my_camera' );
+    
+    function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+            $(".image-tag").val(data_uri);
+            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        } );
     }
 </script>
 @endpush

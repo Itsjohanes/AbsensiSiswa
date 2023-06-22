@@ -14,6 +14,8 @@ use App\Http\Controllers\TahunAjarController;
 use App\Http\Controllers\LaporanAbsenController;
 use App\Http\Controllers\KoordinatSekolahController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\WebcamController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +64,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::resource('absen-siswa', SiswaAbsenController::class);
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
     Route::resource('edit-profile', EditProfileController::class);
+   
+   
 });
 
 

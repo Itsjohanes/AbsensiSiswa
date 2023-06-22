@@ -82,7 +82,9 @@
                                         <td>Tanggal</td>
                                         <td>Nama Siswa</td>
                                         <td>Jam Masuk</td>
+                                        <td>Gambar Masuk</td>
                                         <td>Jam Keluar</td>
+                                        <td>Gambar Keluar</td>
                                         <td>Jumlah Jam Belajar</td>
                                         <td>Keterangan Masuk</td>
                                     </tr>
@@ -94,8 +96,23 @@
                                         <td>{{ \Carbon\Carbon::parse($data->tgl)->locale('id')->isoFormat('LL') }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->jam_masuk }}</td>
+                                        <td>
+                                            @if($data->gambarmasuk)
+                                                <img src="{{ Storage::url('uploads/' . $data->gambarmasuk) }}" alt="Gambar Masuk" width="100" height="100">
+                                            @else
+                                                <span>Tidak ada gambar masuk</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $data->jam_keluar }}</td>
+                                        <td>
+                                            @if($data->gambarkeluar)
+                                                <img src="{{ Storage::url('uploads/' . $data->gambarkeluar) }}" alt="Gambar Keluar" width="100" height="100">
+                                            @else
+                                                <span>Tidak ada gambar keluar</span>
+                                            @endif
+                                        </td> 
                                         <td>{{ $data->jam_kerja }}</td>
+                                        
                                         @if($data->jam_masuk > ('07:00:00'))
                                         <td class="text-danger">Terlambat</td>
                                         @else
@@ -104,7 +121,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">Data Kosong</td>
+                                        <td colspan="9" class="text-center">Data Kosong</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
