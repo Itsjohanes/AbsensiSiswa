@@ -1,22 +1,22 @@
 @extends('layout.app')
 
-@section('title', 'Tambah z')
+@section('title', 'Tambah Guru')
 
 @section('content')
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Admin</h4>
+                <h4 class="page-title">Guru</h4>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-primary">
-                            <h4 class="card-title text-white">Tambah Admin</h4>
+                            <h4 class="card-title text-white">Tambah Guru</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.store') }}" method="POST">
+                            <form action="{{ route('guru.store') }}" method="POST">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>
@@ -59,7 +59,7 @@
                                     <label for="name">Alamat</label>
                                     <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" placeholder="Masukkan Alamat"></textarea>
                                 </div>
-                                <a href="/admin" class="btn btn-warning">Kembali</a>
+                                <a href="/guru" class="btn btn-warning">Kembali</a>
                                 <button type="submit" class="btn btn-success">Simpan</button>
                             </form>
                         </div>

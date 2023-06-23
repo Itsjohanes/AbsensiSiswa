@@ -6,7 +6,9 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\EditProfileGuruController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\SiswaAbsenController;
 use App\Http\Controllers\EditProfileController;
@@ -31,18 +33,19 @@ Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin,siswa']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:admin,siswa,guru']], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
     Route::resource('admin', AdminController::class);
-
+    Route::resource('guru', Guru::class);
     Route::resource('siswa', SiswaController::class);
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
 
     Route::resource('admin', AdminController::class);
+    Route::resource('guru', GuruController::class);
     Route::resource('kelas', KelasController::class);
     Route::resource('tahunajar', TahunAjarController::class);
     Route::resource('siswa', SiswaController::class);
@@ -56,6 +59,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);
     Route::post('ubah-koordinat', [KoordinatSekolahController::class, 'update']);
     Route::post('/import_excel/import', [SiswaController::class, 'import']);
+    Route::post('/import_guru/import', [GuruController::class, 'import']);
+
 });
 
 
@@ -65,6 +70,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
     Route::resource('edit-profile', EditProfileController::class);
    
+   
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
+
+   Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
+   Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+   Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
+   Route::get('/cetak/{data1}/{data2}/{data3}/{data4}', [LaporanAbsenController::class, 'cetak']);
+   Route::resource('edit-profile', EditProfileGuruController::class);
    
 });
 

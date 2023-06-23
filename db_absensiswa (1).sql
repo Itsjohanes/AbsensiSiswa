@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 21, 2023 at 05:38 AM
+-- Generation Time: Jun 22, 2023 at 10:08 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -105,11 +105,10 @@ CREATE TABLE `kelassiswa` (
 --
 
 INSERT INTO `kelassiswa` (`id`, `id_siswa`, `id_kelas`, `id_tahunajar`, `created_at`, `updated_at`) VALUES
-(10, 37, 1, 1, '2023-06-20 07:53:38', '2023-06-20 07:53:38'),
-(11, 38, 1, 1, '2023-06-20 07:53:38', '2023-06-20 07:53:38'),
-(12, 39, 1, 1, '2023-06-20 07:53:38', '2023-06-20 07:53:38'),
-(13, 36, 1, 1, '2023-06-20 07:53:40', '2023-06-20 07:53:40'),
-(14, 41, 1, 1, '2023-06-20 10:30:16', '2023-06-20 10:30:16');
+(1, 1, 1, 1, '2023-06-21 06:22:45', '2023-06-21 06:22:45'),
+(2, 2, 1, 1, '2023-06-21 06:22:45', '2023-06-21 06:22:45'),
+(3, 3, 1, 1, '2023-06-21 06:22:45', '2023-06-21 06:22:45'),
+(4, 4, 1, 1, '2023-06-21 06:22:45', '2023-06-21 06:22:45');
 
 -- --------------------------------------------------------
 
@@ -197,11 +196,10 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `id_user`, `nisn`, `nis`, `tahun_masuk`, `no_hp`, `alamat`, `created_at`, `updated_at`) VALUES
-(36, 38, '87654321', '8765432', '2021', '81234567891', 'Jalan Jenderal Sudirman', '2023-06-20 00:53:38', '2023-06-20 01:11:11'),
-(37, 39, '34567890', '3456789	', '2023', '81234567892', 'Jalan Gatot Subroto', '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(38, 40, '98765432', '9876543', '2020', '81234567893', 'Jalan Imam Bonjol', '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(39, 41, '56789012', '5678901', '2022', '81234567894', 'Jalan Diponegoro', '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(41, 43, '2029229222', '2029229222', '2022', '081934172542', 'Mencoba', '2023-06-20 03:30:16', '2023-06-20 21:56:12');
+(1, 2, '87654321', '8765432	', '2021', '81234567891', 'Jalan Jenderal Sudirman', '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(2, 3, '34567890', '3456789	', '2023', '81234567892', 'Jalan Gatot Subroto', '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(3, 4, '98765432', '9876543', '2020', '81234567893', 'Jalan Imam Bonjol', '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(4, 5, '56789012', '5678901', '2022', '81234567894', 'Jalan Diponegoro', '2023-06-20 23:22:45', '2023-06-20 23:22:45');
 
 -- --------------------------------------------------------
 
@@ -219,16 +217,17 @@ CREATE TABLE `siswa_absensi` (
   `jam_keluar` time DEFAULT NULL,
   `jam_kerja` time DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `gambarmasuk` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `gambarkeluar` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `siswa_absensi`
 --
 
-INSERT INTO `siswa_absensi` (`id`, `id_siswa`, `id_tahunajar`, `id_kelas`, `tgl`, `jam_masuk`, `jam_keluar`, `jam_kerja`, `created_at`, `updated_at`) VALUES
-(8, 36, 1, 1, '2023-06-20', '14:56:36', NULL, NULL, '2023-06-20 00:56:36', '2023-06-20 00:56:36'),
-(10, 36, 1, 1, '2023-06-21', '09:04:59', NULL, NULL, '2023-06-20 19:04:59', '2023-06-20 19:04:59');
+INSERT INTO `siswa_absensi` (`id`, `id_siswa`, `id_tahunajar`, `id_kelas`, `tgl`, `jam_masuk`, `jam_keluar`, `jam_kerja`, `created_at`, `updated_at`, `gambarmasuk`, `gambarkeluar`) VALUES
+(15, 1, 1, 1, '2023-06-22', '16:58:54', '16:59:04', '00:00:10', '2023-06-22 02:58:54', '2023-06-22 02:59:04', '64941b5e620ab.png', '64941b68da6df.png');
 
 -- --------------------------------------------------------
 
@@ -274,11 +273,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `level`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Administrator', 'admin', 'admin@gmail.com', NULL, 'admin123', NULL, '2023-03-20 21:24:31', '2023-03-20 21:24:31'),
-(38, 'Alex Smith John Kasep', 'siswa', 'alex.smith27@example.com', NULL, 'mypassword', NULL, '2023-06-20 00:53:38', '2023-06-20 01:21:35'),
-(39, 'Emily Davis', 'siswa', 'emily.davis64@example.com', NULL, 'password123', NULL, '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(40, 'Ryan Wilson', 'siswa', 'ryan.wilson11@example.com', NULL, 'abcdefg', NULL, '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(41, 'Sophia Adams', 'siswa', 'sophia.adams53@example.com', NULL, 'qwerty123', NULL, '2023-06-20 00:53:38', '2023-06-20 00:53:38'),
-(43, 'Johannes Alexander Putra', 'siswa', 'a455lgrowtopia@gmail.com', NULL, 'users1234', NULL, '2023-06-20 03:30:16', '2023-06-20 03:30:16');
+(2, 'Alex Smith', 'siswa', 'alex.smith27@example.com', NULL, 'mypassword', NULL, '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(3, 'Emily Davis', 'siswa', 'emily.davis64@example.com', NULL, 'password123', NULL, '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(4, 'Ryan Wilson', 'siswa', 'ryan.wilson11@example.com', NULL, 'abcdefg', NULL, '2023-06-20 23:22:45', '2023-06-20 23:22:45'),
+(5, 'Sophia Adams', 'siswa', 'sophia.adams53@example.com', NULL, 'qwerty123', NULL, '2023-06-20 23:22:45', '2023-06-20 23:22:45');
 
 --
 -- Indexes for dumped tables
@@ -390,13 +388,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kelassiswa`
 --
 ALTER TABLE `kelassiswa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `koordinats`
@@ -420,25 +418,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `siswa_absensi`
 --
 ALTER TABLE `siswa_absensi`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tahunajar`
 --
 ALTER TABLE `tahunajar`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

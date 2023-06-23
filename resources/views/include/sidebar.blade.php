@@ -14,9 +14,16 @@
 				@if((auth()->user()->level == 'admin') )
 				<li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
 					<a href="/admin">
-						<i class="fas fa-user-shield text-secondary"></i>
+						<i class="fas fa-user-shield text-success"></i>
 						<p>Admin</p>
 						<span class="badge badge-count badge-danger">{{ \App\Models\Admin::count() }}</span>
+					</a>
+				</li>
+				<li class="nav-item {{ Request::is('guru') ? 'active' : '' }}">
+					<a href="/guru">
+						<i class="fas fa-chalkboard-teacher text-secondary"></i>
+						<p>Guru</p>
+						<span class="badge badge-count badge-danger">{{ \App\Models\Guru::count() }}</span>
 					</a>
 				</li>
 
@@ -85,6 +92,25 @@
 					<a href="/edit-profile">
 						<i class="fas fa-user text-warning"></i>
 						<p>Edit Profile</p>
+					</a>
+				</li>
+
+
+				@endif
+
+				
+				@if (auth()->user()->level == 'guru')
+				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
+					<a href="/edit-profile">
+						<i class="fas fa-user text-warning"></i>
+						<p>Edit Profile</p>
+					</a>
+				</li>
+
+				<li class="nav-item {{ Request::is('laporan-absensi') ? 'active' : '' }}">
+					<a href="/laporan-absensi">
+						<i class="fas fa-table text-primary"></i>
+						<p>Laporan Absensi</p>
 					</a>
 				</li>
 

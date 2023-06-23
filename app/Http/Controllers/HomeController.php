@@ -7,6 +7,7 @@ use DateTimeZone;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Siswa;
+use App\Models\Guru;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\DB;
 use App\Models\SiswaAbsen;
@@ -15,7 +16,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $timezone = 'Asia/Makassar';
+        $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
 
@@ -37,10 +38,10 @@ class HomeController extends Controller
             $persen_siswa = ((SiswaAbsen::where('tgl', $tanggal)->count()) / (Siswa::count())) * 100;
         }
 
-        
+        $guru = Guru::count();
 
 
 
-        return view('pages.home', compact('admin',  'siswa', 'siswa_absen',  'detail_siswa',  'tanggal', 'persen_siswa','tahunAjar'));
+        return view('pages.home', compact('admin', 'guru', 'siswa', 'siswa_absen',  'detail_siswa',  'tanggal', 'persen_siswa','tahunAjar'));
     }
 }

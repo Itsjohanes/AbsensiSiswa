@@ -40,6 +40,8 @@ class LaporanAbsenController extends Controller
             ->whereBetween('siswa_absensi.tgl', [$tglawal, $tglakhir])
             ->select('siswa_absensi.*', 'users.name')
             ->get();
+
+       
         return view('pages.laporan.filter', compact('absen_siswa', 'data1', 'data2', 'data3', 'data4', 'kelas','tahunajar'));
     }
 
