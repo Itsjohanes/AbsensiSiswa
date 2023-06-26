@@ -16,7 +16,7 @@
                             <h4 class="card-title text-white">Edit Guru</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('edit-profile.update', $guru->id)}}" method="POST">
+                            <form action="{{ route('edit-profile-guru.update', $guru->id)}}" method="POST">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>

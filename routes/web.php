@@ -34,12 +34,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin,siswa,guru']], function () {
-
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-
-    Route::resource('admin', AdminController::class);
-    Route::resource('guru', Guru::class);
-    Route::resource('siswa', SiswaController::class);
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');    
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
@@ -49,16 +44,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::resource('kelas', KelasController::class);
     Route::resource('tahunajar', TahunAjarController::class);
     Route::resource('siswa', SiswaController::class);
-    Route::resource('transaksi', TransaksiController::class);
-    Route::get('/filtertransaksi/{idkelas}/{idtahunajar}', [TransaksiController::class, 'filter']);
-    Route::get('/hapustransaksi/{idkelas}/{idtahunajar}', [TransaksiController::class, 'hapus']);
-    Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
-    Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
-    Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
-    Route::get('/cetak/{data1}/{data2}/{data3}/{data4}', [LaporanAbsenController::class, 'cetak']);
     Route::get('lokasi-sekolah', [KoordinatSekolahController::class, 'index']);
     Route::post('ubah-koordinat', [KoordinatSekolahController::class, 'update']);
-    Route::post('/import_excel/import', [SiswaController::class, 'import']);
+    Route::post('/import_siswa/import', [SiswaController::class, 'import']);
     Route::post('/import_guru/import', [GuruController::class, 'import']);
 
 });
@@ -68,18 +56,27 @@ Route::group(['middleware' => ['auth', 'ceklevel:siswa']], function () {
 
     Route::resource('absen-siswa', SiswaAbsenController::class);
     Route::post('absen-siswa-keluar', [SiswaAbsenController::class, 'absenKeluar'])->name('absen-siswa-keluar');
-    Route::resource('edit-profile', EditProfileController::class);
-   
-   
+    Route::resource('edit-profile-siswa', EditProfileController::class);
+
 });
+
+
+
+Route::group(['middleware' => ['auth', 'ceklevel:admin,guru']], function () {
+
+    Route::resource('transaksi', TransaksiController::class);
+    Route::get('/filtertransaksi/{idkelas}/{idtahunajar}', [TransaksiController::class, 'filter']);
+    Route::get('/hapustransaksi/{idkelas}/{idtahunajar}', [TransaksiController::class, 'hapus']);
+    Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
+    Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+    Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
+    Route::get('/cetak/{data1}/{data2}/{data3}/{data4}', [LaporanAbsenController::class, 'cetak']);
+});
+
 
 Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
 
-   Route::get('/laporan-absensi', [LaporanAbsenController::class, 'laporan']);
-   Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
-   Route::get('/filter/{tglawal}/{tglakhir}/{idkelas}/{idtahunajar}', [LaporanAbsenController::class, 'filter']);
-   Route::get('/cetak/{data1}/{data2}/{data3}/{data4}', [LaporanAbsenController::class, 'cetak']);
-   Route::resource('edit-profile', EditProfileGuruController::class);
+   Route::resource('edit-profile-guru', EditProfileGuruController::class);
    
 });
 

@@ -16,7 +16,7 @@
                             <h4 class="card-title text-white">Edit Profile</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('edit-profile.update', $siswa->id) }}" method="POST">
+                            <form action="{{ route('edit-profile-siswa.update', $siswa->id) }}" method="POST">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <ul>

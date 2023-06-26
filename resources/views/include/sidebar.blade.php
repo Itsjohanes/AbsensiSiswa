@@ -88,8 +88,8 @@
 						<p>Lokasi Anda</p>
 					</a>
 				</li>
-				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
-					<a href="/edit-profile">
+				<li class="nav-item {{ Request::is('edit-profile-siswa') ? 'active' : '' }}">
+					<a href="/edit-profile-siswa">
 						<i class="fas fa-user text-warning"></i>
 						<p>Edit Profile</p>
 					</a>
@@ -100,14 +100,14 @@
 
 				
 				@if (auth()->user()->level == 'guru')
-				<li class="nav-item {{ Request::is('edit-profile') ? 'active' : '' }}">
-					<a href="/edit-profile">
+				<li class="nav-item {{ Request::is('edit-profile-guru') ? 'active' : '' }}">
+					<a href="/edit-profile-guru">
 						<i class="fas fa-user text-warning"></i>
 						<p>Edit Profile</p>
 					</a>
 				</li>
 
-				<li class="nav-item {{ Request::is('laporan-absensi') ? 'active' : '' }}">
+				<li class="nav-item {{ Request::is('laporan-absensi-guru') ? 'active' : '' }}">
 					<a href="/laporan-absensi">
 						<i class="fas fa-table text-primary"></i>
 						<p>Laporan Absensi</p>

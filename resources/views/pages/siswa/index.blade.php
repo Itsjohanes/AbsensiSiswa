@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ route('siswa.create') }}" class="btn btn-primary">Tambah Siswa</a>
-                            <form action="{{ url('/import_excel/import')  }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('/import_siswa/import')  }}" method="POST" enctype="multipart/form-data">
                             @csrf
 		                    <input type="file" name="file" required>
 		                    <button type="submit" class="btn btn-success">Upload</button>
